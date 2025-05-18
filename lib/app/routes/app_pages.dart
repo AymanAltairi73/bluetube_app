@@ -11,12 +11,15 @@ import '../../features/youtube_search/presentation/screens/youtube_search_screen
 import '../../features/youtube_search/presentation/screens/youtube_video_player_screen.dart';
 import '../../features/youtube_search/presentation/screens/watch_later_screen.dart';
 import '../../features/youtube_search/presentation/screens/downloads_screen.dart';
+import '../../features/auth/presentation/routes/auth_routes.dart';
 import 'app_routes.dart';
 import '../navigation/main_navigation.dart';
 
 /// Application routes configuration
 class AppPages {
   static final routes = [
+    // Add authentication routes
+    ...AuthRoutes.routes,
     GetPage(
       name: AppRoutes.main,
       page: () => const MainNavigation(),

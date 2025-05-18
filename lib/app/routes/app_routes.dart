@@ -18,4 +18,9 @@ class AppRoutes {
   static const youtubeVideoPlayer = '/youtube-video-player';
   static const watchLater = '/watch-later';
   static const downloads = '/downloads';
+
+  // Authentication routes
+  static const auth = '/auth';
+  static const login = '/login';
+  static const signup = '/signup';
 }

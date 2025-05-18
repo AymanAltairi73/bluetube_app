@@ -70,6 +70,7 @@ class ExploreLocalDataSourceImpl implements ExploreLocalDataSource {
         'music': List<Map<String, dynamic>>.from(jsonData['music_videos']),
         'gaming': List<Map<String, dynamic>>.from(jsonData['gaming_videos']),
       };
+      
       return _cachedVideos!;
     } catch (e) {
       // Fallback to hardcoded data if JSON loading fails

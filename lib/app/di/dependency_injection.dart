@@ -38,6 +38,9 @@ import '../../features/youtube_search/domain/usecases/delete_downloaded_video.da
 import '../../features/youtube_search/domain/usecases/is_video_downloaded.dart';
 import '../../features/youtube_search/presentation/controllers/downloads_controller.dart';
 
+// Auth feature
+import '../../features/auth/presentation/controllers/auth_controller.dart';
+
 // Home feature
 import '../../features/home/data/datasources/home_local_data_source.dart';
 import '../../features/home/data/repositories/home_repository_impl.dart';
@@ -294,6 +297,12 @@ Future<void> init() async {
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => GetStorage());
   sl.registerLazySingleton(() => DefaultCacheManager());
+
+  //! Features - Authentication
+  // Controllers
+  sl.registerFactory(
+    () => AuthController(),
+  );
 
   //! Features - Watch Later
   // Controllers

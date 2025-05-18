@@ -28,7 +28,7 @@ class BlueTubeApp extends StatelessWidget {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: themeController.themeMode,
-          initialRoute: AppRoutes.main,
+          initialRoute: AppRoutes.auth,
           getPages: AppPages.routes,
           defaultTransition: Transition.fade,
         );
