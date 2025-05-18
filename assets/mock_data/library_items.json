@@ -1,0 +1,154 @@
+{
+  "items": [
+    {
+      "id": "lib001",
+      "title": "Flutter Clean Architecture Tutorial - Complete Guide",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Flutter Mastery",
+      "created_at": "2023-05-15T10:30:00Z",
+      "type": "watch_later",
+      "views": 245000,
+      "duration": "32:45"
+    },
+    {
+      "id": "lib002",
+      "title": "Building Responsive UIs in Flutter - Best Practices",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Flutter Community",
+      "created_at": "2023-05-14T15:45:00Z",
+      "type": "history",
+      "views": 189000,
+      "duration": "24:18"
+    },
+    {
+      "id": "lib003",
+      "title": "State Management with GetX - Complete Course",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Flutter Explained",
+      "created_at": "2023-05-13T09:20:00Z",
+      "type": "liked_video",
+      "views": 320000,
+      "duration": "45:22"
+    },
+    {
+      "id": "lib004",
+      "title": "Flutter Animation Masterclass - From Basics to Advanced",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Code With Andrea",
+      "created_at": "2023-05-12T14:10:00Z",
+      "type": "saved_video",
+      "views": 178000,
+      "duration": "38:15"
+    },
+    {
+      "id": "lib005",
+      "title": "Flutter Testing - Unit, Widget, and Integration Tests",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Flutter Mastery",
+      "created_at": "2023-05-11T11:25:00Z",
+      "type": "watch_later",
+      "views": 142000,
+      "duration": "29:50"
+    },
+    {
+      "id": "lib006",
+      "title": "Firebase Authentication in Flutter - Complete Guide",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Flutter Community",
+      "created_at": "2023-05-10T16:40:00Z",
+      "type": "history",
+      "views": 265000,
+      "duration": "41:12"
+    },
+    {
+      "id": "lib007",
+      "title": "Flutter REST API Integration - Best Practices",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Flutter Explained",
+      "created_at": "2023-05-09T13:15:00Z",
+      "type": "liked_video",
+      "views": 198000,
+      "duration": "35:28"
+    },
+    {
+      "id": "lib008",
+      "title": "Flutter Performance Optimization Techniques",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Code With Andrea",
+      "created_at": "2023-05-08T10:05:00Z",
+      "type": "saved_video",
+      "views": 215000,
+      "duration": "42:37"
+    },
+    {
+      "id": "lib009",
+      "title": "Flutter Design Patterns - Practical Examples",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Flutter Mastery",
+      "created_at": "2023-05-07T14:30:00Z",
+      "type": "watch_later",
+      "views": 176000,
+      "duration": "38:54"
+    },
+    {
+      "id": "lib010",
+      "title": "Flutter Internationalization and Localization",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Flutter Community",
+      "created_at": "2023-05-06T09:45:00Z",
+      "type": "history",
+      "views": 132000,
+      "duration": "27:19"
+    },
+    {
+      "id": "lib011",
+      "title": "Flutter Custom Animations - From Scratch",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Flutter Explained",
+      "created_at": "2023-05-05T16:20:00Z",
+      "type": "liked_video",
+      "views": 245000,
+      "duration": "36:42"
+    },
+    {
+      "id": "lib012",
+      "title": "Flutter State Management Comparison - Provider vs GetX vs Bloc",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Code With Andrea",
+      "created_at": "2023-05-04T11:10:00Z",
+      "type": "saved_video",
+      "views": 320000,
+      "duration": "48:15"
+    },
+    {
+      "id": "lib013",
+      "title": "Flutter Clean Code - Best Practices for Maintainable Apps",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Flutter Mastery",
+      "created_at": "2023-05-03T13:35:00Z",
+      "type": "watch_later",
+      "views": 187000,
+      "duration": "33:27"
+    },
+    {
+      "id": "lib014",
+      "title": "Flutter Navigation 2.0 - Complete Guide",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Flutter Community",
+      "created_at": "2023-05-02T15:50:00Z",
+      "type": "history",
+      "views": 156000,
+      "duration": "31:08"
+    },
+    {
+      "id": "lib015",
+      "title": "Flutter Dependency Injection - From Basics to Advanced",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_name": "Flutter Explained",
+      "created_at": "2023-05-01T10:25:00Z",
+      "type": "liked_video",
+      "views": 198000,
+      "duration": "39:51"
+    }
+  ]
+}

@@ -1,0 +1,221 @@
+{
+  "videos": [
+    {
+      "id": "vid001",
+      "title": "The Beauty of Existence - Heart Touching Nasheed",
+      "description": "A beautiful nasheed that touches the heart and reminds us of the beauty of existence. This nasheed is performed by a talented group of artists who have dedicated their lives to spreading positive messages through their music.\n\nLyrics:\nIn the name of the Most Merciful,\nWe find our peace and solace,\nThrough the trials and tribulations,\nWe seek His divine guidance.\n\n#Nasheed #IslamicMusic #Inspiration",
+      "video_url": "assets/videos/video_1.mp4",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_id": "channel001",
+      "channel_name": "Islamic Inspirations",
+      "channel_avatar": "assets/images/channel_avatar.png",
+      "views": 19210251,
+      "likes": 1250000,
+      "dislikes": 12000,
+      "published_at": "2016-07-01T12:30:00Z",
+      "is_liked": false,
+      "is_disliked": false,
+      "is_subscribed": false,
+      "subscriber_count": 5200000,
+      "tags": ["nasheed", "islamic", "inspiration", "music", "spiritual"],
+      "category": "Music",
+      "is_live": false,
+      "comments": [
+        {
+          "id": "comment001",
+          "video_id": "vid001",
+          "user_id": "user001",
+          "user_name": "Ahmed Khan",
+          "user_avatar": "assets/images/profile.png",
+          "text": "This nasheed always brings tears to my eyes. So beautiful and touching!",
+          "created_at": "2023-01-15T08:45:00Z",
+          "likes": 1250,
+          "replies": 45,
+          "is_liked": false,
+          "is_pinned": true,
+          "is_owner": false
+        },
+        {
+          "id": "comment002",
+          "video_id": "vid001",
+          "user_id": "user002",
+          "user_name": "Sarah Johnson",
+          "user_avatar": "assets/images/profile.png",
+          "text": "I'm not Muslim but this is so beautiful. Music truly is a universal language.",
+          "created_at": "2023-02-20T14:30:00Z",
+          "likes": 980,
+          "replies": 32,
+          "is_liked": false,
+          "is_pinned": false,
+          "is_owner": false
+        },
+        {
+          "id": "comment003",
+          "video_id": "vid001",
+          "user_id": "user003",
+          "user_name": "Mohammed Ali",
+          "user_avatar": "assets/images/profile.png",
+          "text": "I listen to this every morning to start my day with positivity.",
+          "created_at": "2023-03-10T07:15:00Z",
+          "likes": 750,
+          "replies": 18,
+          "is_liked": true,
+          "is_pinned": false,
+          "is_owner": false
+        },
+        {
+          "id": "comment004",
+          "video_id": "vid001",
+          "user_id": "user004",
+          "user_name": "Fatima Hassan",
+          "user_avatar": "assets/images/profile.png",
+          "text": "The lyrics are so meaningful. Thank you for sharing this beautiful nasheed.",
+          "created_at": "2023-04-05T19:20:00Z",
+          "likes": 620,
+          "replies": 12,
+          "is_liked": false,
+          "is_pinned": false,
+          "is_owner": false
+        },
+        {
+          "id": "comment005",
+          "video_id": "vid001",
+          "user_id": "user005",
+          "user_name": "John Smith",
+          "user_avatar": "assets/images/profile.png",
+          "text": "Can someone please translate the lyrics to English? It sounds beautiful.",
+          "created_at": "2023-05-12T11:40:00Z",
+          "likes": 480,
+          "replies": 25,
+          "is_liked": false,
+          "is_pinned": false,
+          "is_owner": false
+        }
+      ],
+      "related_videos": [
+        {
+          "id": "rel001",
+          "title": "The Path to Peace - Inspirational Nasheed",
+          "thumbnail_url": "assets/images/thumbnail.jpg",
+          "channel_name": "Islamic Inspirations",
+          "channel_avatar": "assets/images/channel_avatar.png",
+          "views": 8500000,
+          "published_at": "2017-03-15T14:20:00Z",
+          "duration": "6:15",
+          "is_live": false
+        },
+        {
+          "id": "rel002",
+          "title": "Ramadan Nasheed Collection 2023",
+          "thumbnail_url": "assets/images/thumbnail.jpg",
+          "channel_name": "Islamic Melodies",
+          "channel_avatar": "assets/images/channel_avatar.png",
+          "views": 4200000,
+          "published_at": "2023-03-22T09:45:00Z",
+          "duration": "45:30",
+          "is_live": false
+        },
+        {
+          "id": "rel003",
+          "title": "LIVE: Islamic Conference 2023",
+          "thumbnail_url": "assets/images/thumbnail.jpg",
+          "channel_name": "Islamic Knowledge",
+          "channel_avatar": "assets/images/channel_avatar.png",
+          "views": 125000,
+          "published_at": "2023-06-01T18:00:00Z",
+          "duration": "2:30:00",
+          "is_live": true
+        }
+      ]
+    },
+    {
+      "id": "vid002",
+      "title": "Flutter Clean Architecture Tutorial - Complete Guide 2023",
+      "description": "Learn how to implement Clean Architecture in your Flutter applications with this comprehensive guide. In this tutorial, we'll cover the principles of Clean Architecture, how to structure your Flutter project, and best practices for maintaining a clean and scalable codebase.\n\nTopics covered:\n- Introduction to Clean Architecture\n- Domain, Data, and Presentation layers\n- Dependency Injection\n- Error Handling\n- Testing\n\n#Flutter #CleanArchitecture #MobileDevelopment",
+      "video_url": "assets/videos/video_2.mp4",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_id": "channel002",
+      "channel_name": "Flutter Mastery",
+      "channel_avatar": "assets/images/channel_avatar.png",
+      "views": 245000,
+      "likes": 18500,
+      "dislikes": 320,
+      "published_at": "2023-05-15T10:30:00Z",
+      "is_liked": true,
+      "is_disliked": false,
+      "is_subscribed": true,
+      "subscriber_count": 850000,
+      "tags": ["flutter", "clean architecture", "programming", "mobile development", "tutorial"],
+      "category": "Education",
+      "is_live": false,
+      "comments": [
+        {
+          "id": "comment006",
+          "video_id": "vid002",
+          "user_id": "user006",
+          "user_name": "Flutter Dev",
+          "user_avatar": "assets/images/profile.png",
+          "text": "This is by far the best explanation of Clean Architecture in Flutter I've seen. Thank you!",
+          "created_at": "2023-05-16T09:30:00Z",
+          "likes": 450,
+          "replies": 15,
+          "is_liked": true,
+          "is_pinned": true,
+          "is_owner": false
+        },
+        {
+          "id": "comment007",
+          "video_id": "vid002",
+          "user_id": "user007",
+          "user_name": "Code Enthusiast",
+          "user_avatar": "assets/images/profile.png",
+          "text": "I've been struggling with implementing Clean Architecture in my Flutter projects. This tutorial cleared up so many questions!",
+          "created_at": "2023-05-17T14:15:00Z",
+          "likes": 320,
+          "replies": 8,
+          "is_liked": false,
+          "is_pinned": false,
+          "is_owner": false
+        },
+        {
+          "id": "comment008",
+          "video_id": "vid002",
+          "user_id": "user008",
+          "user_name": "Mobile Developer",
+          "user_avatar": "assets/images/profile.png",
+          "text": "Can you make a tutorial on implementing this with GetX for state management?",
+          "created_at": "2023-05-18T11:20:00Z",
+          "likes": 280,
+          "replies": 12,
+          "is_liked": false,
+          "is_pinned": false,
+          "is_owner": false
+        }
+      ],
+      "related_videos": [
+        {
+          "id": "rel004",
+          "title": "State Management with GetX - Complete Course",
+          "thumbnail_url": "assets/images/thumbnail.jpg",
+          "channel_name": "Flutter Explained",
+          "channel_avatar": "assets/images/channel_avatar.png",
+          "views": 320000,
+          "published_at": "2023-05-13T09:20:00Z",
+          "duration": "45:22",
+          "is_live": false
+        },
+        {
+          "id": "rel005",
+          "title": "Flutter Testing - Unit, Widget, and Integration Tests",
+          "thumbnail_url": "assets/images/thumbnail.jpg",
+          "channel_name": "Flutter Mastery",
+          "channel_avatar": "assets/images/channel_avatar.png",
+          "views": 142000,
+          "published_at": "2023-05-11T11:25:00Z",
+          "duration": "29:50",
+          "is_live": false
+        }
+      ]
+    }
+  ]
+}

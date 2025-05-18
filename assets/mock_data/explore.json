@@ -1,0 +1,187 @@
+{
+  "categories": [
+    {
+      "id": "cat001",
+      "title": "Trending",
+      "icon": "local_fire_department",
+      "gradient_start": "#FF9800",
+      "gradient_end": "#F44336"
+    },
+    {
+      "id": "cat002",
+      "title": "Music",
+      "icon": "music_note",
+      "gradient_start": "#2196F3",
+      "gradient_end": "#03A9F4"
+    },
+    {
+      "id": "cat003",
+      "title": "Gaming",
+      "icon": "sports_esports",
+      "gradient_start": "#4CAF50",
+      "gradient_end": "#8BC34A"
+    },
+    {
+      "id": "cat004",
+      "title": "News",
+      "icon": "article",
+      "gradient_start": "#3F51B5",
+      "gradient_end": "#2196F3"
+    },
+    {
+      "id": "cat005",
+      "title": "Learning",
+      "icon": "school",
+      "gradient_start": "#9C27B0",
+      "gradient_end": "#673AB7"
+    },
+    {
+      "id": "cat006",
+      "title": "Fashion",
+      "icon": "style",
+      "gradient_start": "#E91E63",
+      "gradient_end": "#F44336"
+    },
+    {
+      "id": "cat007",
+      "title": "Sports",
+      "icon": "sports_basketball",
+      "gradient_start": "#FF5722",
+      "gradient_end": "#FF9800"
+    },
+    {
+      "id": "cat008",
+      "title": "Technology",
+      "icon": "devices",
+      "gradient_start": "#607D8B",
+      "gradient_end": "#455A64"
+    }
+  ],
+  "trending_videos": [
+    {
+      "id": "trend001",
+      "title": "Build it in Figma: Create a Design System — Foundations",
+      "thumbnail_url": "assets/images/video_thumbnail.png",
+      "channel_name": "Figma",
+      "channel_logo": "assets/images/channel_logo.png",
+      "views": "44K",
+      "time_ago": "4 months ago",
+      "duration": "54:48",
+      "is_live": false
+    },
+    {
+      "id": "trend002",
+      "title": "Flutter 3.0: What's New and Improved",
+      "thumbnail_url": "assets/images/video_thumbnail.png",
+      "channel_name": "Flutter",
+      "channel_logo": "assets/images/channel_logo.png",
+      "views": "128K",
+      "time_ago": "2 weeks ago",
+      "duration": "32:15",
+      "is_live": false
+    },
+    {
+      "id": "trend003",
+      "title": "LIVE: Google I/O 2023 - Developer Keynote",
+      "thumbnail_url": "assets/images/video_thumbnail.png",
+      "channel_name": "Google Developers",
+      "channel_logo": "assets/images/channel_logo.png",
+      "views": "1.2M",
+      "time_ago": "Streaming now",
+      "duration": "2:15:00",
+      "is_live": true
+    },
+    {
+      "id": "trend004",
+      "title": "The Future of Mobile Development: Cross-Platform vs Native",
+      "thumbnail_url": "assets/images/video_thumbnail.png",
+      "channel_name": "Tech Insights",
+      "channel_logo": "assets/images/channel_logo.png",
+      "views": "87K",
+      "time_ago": "1 week ago",
+      "duration": "28:42",
+      "is_live": false
+    },
+    {
+      "id": "trend005",
+      "title": "Clean Architecture in Flutter: A Practical Guide",
+      "thumbnail_url": "assets/images/video_thumbnail.png",
+      "channel_name": "Flutter Mastery",
+      "channel_logo": "assets/images/channel_logo.png",
+      "views": "156K",
+      "time_ago": "3 weeks ago",
+      "duration": "45:18",
+      "is_live": false
+    }
+  ],
+  "music_videos": [
+    {
+      "id": "music001",
+      "title": "Taylor Swift - Blank Space (Official Music Video)",
+      "thumbnail_url": "assets/images/video_thumbnail.png",
+      "channel_name": "Taylor Swift",
+      "channel_logo": "assets/images/channel_logo.png",
+      "views": "3.2B",
+      "time_ago": "8 years ago",
+      "duration": "4:32",
+      "is_live": false
+    },
+    {
+      "id": "music002",
+      "title": "Ed Sheeran - Shape of You (Official Music Video)",
+      "thumbnail_url": "assets/images/video_thumbnail.png",
+      "channel_name": "Ed Sheeran",
+      "channel_logo": "assets/images/channel_logo.png",
+      "views": "5.8B",
+      "time_ago": "6 years ago",
+      "duration": "4:24",
+      "is_live": false
+    },
+    {
+      "id": "music003",
+      "title": "Billie Eilish - bad guy (Official Music Video)",
+      "thumbnail_url": "assets/images/video_thumbnail.png",
+      "channel_name": "Billie Eilish",
+      "channel_logo": "assets/images/channel_logo.png",
+      "views": "1.2B",
+      "time_ago": "4 years ago",
+      "duration": "3:25",
+      "is_live": false
+    }
+  ],
+  "gaming_videos": [
+    {
+      "id": "game001",
+      "title": "Minecraft: Building a Modern House Tutorial",
+      "thumbnail_url": "assets/images/video_thumbnail.png",
+      "channel_name": "Gaming with Steve",
+      "channel_logo": "assets/images/channel_logo.png",
+      "views": "4.5M",
+      "time_ago": "2 months ago",
+      "duration": "25:18",
+      "is_live": false
+    },
+    {
+      "id": "game002",
+      "title": "LIVE: Fortnite Chapter 4 Season 3 Gameplay",
+      "thumbnail_url": "assets/images/video_thumbnail.png",
+      "channel_name": "Epic Gamers",
+      "channel_logo": "assets/images/channel_logo.png",
+      "views": "325K",
+      "time_ago": "Streaming now",
+      "duration": "3:42:15",
+      "is_live": true
+    },
+    {
+      "id": "game003",
+      "title": "The Legend of Zelda: Tears of the Kingdom - Full Walkthrough",
+      "thumbnail_url": "assets/images/video_thumbnail.png",
+      "channel_name": "Nintendo Guide",
+      "channel_logo": "assets/images/channel_logo.png",
+      "views": "2.1M",
+      "time_ago": "1 month ago",
+      "duration": "4:12:45",
+      "is_live": false
+    }
+  ]
+}

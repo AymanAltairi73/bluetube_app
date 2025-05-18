@@ -1,0 +1,180 @@
+{
+  "channels": [
+    {
+      "id": "channel001",
+      "name": "Like Nastya",
+      "image": "assets/images/channel1.jpg",
+      "subscribers": 96500000,
+      "has_new_content": true,
+      "is_verified": true,
+      "description": "Fun family-friendly content for kids and parents."
+    },
+    {
+      "id": "channel002",
+      "name": "Bassera",
+      "image": "assets/images/channel2.jpg",
+      "subscribers": 12300000,
+      "has_new_content": true,
+      "is_verified": true,
+      "description": "Music and entertainment channel with the latest hits."
+    },
+    {
+      "id": "channel003",
+      "name": "Alor Path",
+      "image": "assets/images/channel3.jpg",
+      "subscribers": 8750000,
+      "has_new_content": true,
+      "is_verified": false,
+      "description": "Educational content and tutorials for students."
+    },
+    {
+      "id": "channel004",
+      "name": "Rain Drop",
+      "image": "assets/images/channel4.jpg",
+      "subscribers": 5420000,
+      "has_new_content": true,
+      "is_verified": true,
+      "description": "Relaxing nature sounds and meditation music."
+    },
+    {
+      "id": "channel005",
+      "name": "Flutter Mastery",
+      "image": "assets/images/channel1.jpg",
+      "subscribers": 1250000,
+      "has_new_content": true,
+      "is_verified": true,
+      "description": "Flutter tutorials and tips for mobile app development."
+    },
+    {
+      "id": "channel006",
+      "name": "Code With Andrea",
+      "image": "assets/images/channel2.jpg",
+      "subscribers": 980000,
+      "has_new_content": false,
+      "is_verified": true,
+      "description": "Programming tutorials and coding challenges."
+    },
+    {
+      "id": "channel007",
+      "name": "Flutter Community",
+      "image": "assets/images/channel3.jpg",
+      "subscribers": 750000,
+      "has_new_content": true,
+      "is_verified": true,
+      "description": "Community-driven Flutter content and news."
+    },
+    {
+      "id": "channel008",
+      "name": "Flutter Explained",
+      "image": "assets/images/channel4.jpg",
+      "subscribers": 620000,
+      "has_new_content": true,
+      "is_verified": false,
+      "description": "Detailed explanations of Flutter concepts and features."
+    },
+    {
+      "id": "channel009",
+      "name": "Tech Titans",
+      "image": "assets/images/channel1.jpg",
+      "subscribers": 3200000,
+      "has_new_content": false,
+      "is_verified": true,
+      "description": "Latest tech news and gadget reviews."
+    },
+    {
+      "id": "channel010",
+      "name": "Mobile Dev Hub",
+      "image": "assets/images/channel2.jpg",
+      "subscribers": 1850000,
+      "has_new_content": true,
+      "is_verified": true,
+      "description": "Mobile development tutorials across multiple platforms."
+    },
+    {
+      "id": "channel011",
+      "name": "UI/UX Masters",
+      "image": "assets/images/channel3.jpg",
+      "subscribers": 920000,
+      "has_new_content": true,
+      "is_verified": false,
+      "description": "Design principles and UI/UX best practices."
+    },
+    {
+      "id": "channel012",
+      "name": "Coding Journey",
+      "image": "assets/images/channel4.jpg",
+      "subscribers": 540000,
+      "has_new_content": false,
+      "is_verified": true,
+      "description": "Follow the journey of a self-taught programmer."
+    }
+  ],
+  "videos": [
+    {
+      "id": "sub_vid001",
+      "title": "Flutter Clean Architecture Tutorial - Complete Guide 2023",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_id": "channel005",
+      "channel_name": "Flutter Mastery",
+      "channel_avatar": "assets/images/channel1.jpg",
+      "views": 245000,
+      "published_at": "2023-05-15T10:30:00Z",
+      "duration": "32:45",
+      "is_short": false,
+      "is_live": false
+    },
+    {
+      "id": "sub_vid002",
+      "title": "Building Responsive UIs in Flutter - Best Practices",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_id": "channel007",
+      "channel_name": "Flutter Community",
+      "channel_avatar": "assets/images/channel3.jpg",
+      "views": 189000,
+      "published_at": "2023-05-14T15:45:00Z",
+      "duration": "24:18",
+      "is_short": false,
+      "is_live": false
+    },
+    {
+      "id": "sub_vid003",
+      "title": "State Management with GetX - Complete Course",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_id": "channel008",
+      "channel_name": "Flutter Explained",
+      "channel_avatar": "assets/images/channel4.jpg",
+      "views": 320000,
+      "published_at": "2023-05-13T09:20:00Z",
+      "duration": "45:22",
+      "is_short": false,
+      "is_live": false
+    },
+    {
+      "id": "sub_vid004",
+      "title": "Flutter Animation in 30 Seconds #shorts",
+      "thumbnail_url": "assets/images/short_thumbnail.jpg",
+      "channel_id": "channel005",
+      "channel_name": "Flutter Mastery",
+      "channel_avatar": "assets/images/channel1.jpg",
+      "views": 189000,
+      "published_at": "2023-05-12T15:45:00Z",
+      "duration": "0:30",
+      "is_short": true,
+      "is_live": false
+    },
+    {
+      "id": "sub_vid005",
+      "title": "LIVE: Flutter Q&A Session - Ask Your Questions!",
+      "thumbnail_url": "assets/images/thumbnail.jpg",
+      "channel_id": "channel006",
+      "channel_name": "Code With Andrea",
+      "channel_avatar": "assets/images/channel2.jpg",
+      "views": 12500,
+      "published_at": "2023-06-01T18:00:00Z",
+      "duration": "1:30:00",
+      "is_short": false,
+      "is_live": true
+    }
+  ],
+  "filters": ["All", "Today", "Yesterday", "This week", "This month", "Continue watching"]
+}
