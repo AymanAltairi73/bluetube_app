@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
-import 'pages/MainNavigation.dart';
+import 'package:get_storage/get_storage.dart';
+import 'app/app.dart';
+import 'app/di/dependency_injection.dart' as di;
 
-void main() {
-  runApp(const MyApp());
-}
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  // Initialize GetStorage for theme persistence
+  await GetStorage.init();
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'BlueTube',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
-      ),
-      home: const  MainNavigation(),
-    );
-  }
+  // Initialize dependencies
+  await di.init();
+
+  runApp(const BlueTubeApp());
 }
