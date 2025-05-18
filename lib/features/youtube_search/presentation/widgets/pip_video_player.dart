@@ -91,10 +91,21 @@ class _PipVideoPlayerState extends State<PipVideoPlayer> with WidgetsBindingObse
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    _controller.removeListener(_listener);
-    _controller.dispose();
-    super.dispose();
+    try {
+      // Dispose player resources
+      _controller.removeListener(_listener);
+      _controller.dispose();
+    } catch (e) {
+      debugPrint('Error disposing YouTube player controller: $e');
+    } finally {
+      // Always remove the observer to prevent memory leaks
+      try {
+        WidgetsBinding.instance.removeObserver(this);
+      } catch (e) {
+        debugPrint('Error removing observer: $e');
+      }
+      super.dispose();
+    }
   }
 
   @override
@@ -210,8 +221,8 @@ class _PipVideoPlayerState extends State<PipVideoPlayer> with WidgetsBindingObse
                   : null,
             );
           },
-          floatingWidth: 200.w,
-          floatingHeight: 120.h,
+          floatingWidth: MediaQuery.of(context).size.width * 0.4,
+          floatingHeight: MediaQuery.of(context).size.width * 0.225, // 16:9 ratio
           initialCorner: PIPViewCorner.bottomRight,
           avoidKeyboard: true,
         );
