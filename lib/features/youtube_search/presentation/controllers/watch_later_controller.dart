@@ -67,7 +67,7 @@ class WatchLaterController extends GetxController {
       duration: video.duration,
     );
 
-    final result = await saveVideo(savedVideo);
+    final result = await saveVideo(SaveVideoParams(video: savedVideo));
 
     return result.fold(
       (failure) {
@@ -93,7 +93,7 @@ class WatchLaterController extends GetxController {
 
   /// Remove a video from Watch Later
   Future<bool> removeVideoFromWatchLater(String videoId) async {
-    final result = await removeSavedVideo(videoId);
+    final result = await removeSavedVideo(RemoveSavedVideoParams(videoId: videoId));
 
     return result.fold(
       (failure) {

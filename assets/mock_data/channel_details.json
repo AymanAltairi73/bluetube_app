@@ -1,0 +1,181 @@
+{
+  "kind": "youtube#channelListResponse",
+  "etag": "mock_etag_channel",
+  "pageInfo": {
+    "totalResults": 1,
+    "resultsPerPage": 1
+  },
+  "items": [
+    {
+      "kind": "youtube#channel",
+      "etag": "mock_etag_channel_1",
+      "id": "channel001",
+      "snippet": {
+        "title": "Flutter Dev",
+        "description": "The official Flutter development channel. Learn Flutter from the experts and stay up-to-date with the latest Flutter news, tutorials, and best practices.",
+        "customUrl": "@flutterdev",
+        "publishedAt": "2018-01-15T10:00:00Z",
+        "thumbnails": {
+          "default": {
+            "url": "assets/images/channel_avatar.png",
+            "width": 88,
+            "height": 88
+          },
+          "medium": {
+            "url": "assets/images/channel_avatar.png",
+            "width": 240,
+            "height": 240
+          },
+          "high": {
+            "url": "assets/images/channel_avatar.png",
+            "width": 800,
+            "height": 800
+          }
+        },
+        "localized": {
+          "title": "Flutter Dev",
+          "description": "The official Flutter development channel. Learn Flutter from the experts and stay up-to-date with the latest Flutter news, tutorials, and best practices."
+        },
+        "country": "US"
+      },
+      "contentDetails": {
+        "relatedPlaylists": {
+          "likes": "",
+          "uploads": "UU_x5XG1OV2P6uZZ5FSM9Ttw"
+        }
+      },
+      "statistics": {
+        "viewCount": "98765432",
+        "subscriberCount": "1200000",
+        "hiddenSubscriberCount": false,
+        "videoCount": "450"
+      },
+      "brandingSettings": {
+        "channel": {
+          "title": "Flutter Dev",
+          "description": "The official Flutter development channel. Learn Flutter from the experts and stay up-to-date with the latest Flutter news, tutorials, and best practices.",
+          "keywords": "flutter,dart,mobile development,cross-platform,ui framework",
+          "defaultLanguage": "en",
+          "country": "US"
+        },
+        "image": {
+          "bannerExternalUrl": "assets/images/channel_banner.jpg"
+        }
+      }
+    },
+    {
+      "kind": "youtube#channel",
+      "etag": "mock_etag_channel_2",
+      "id": "channel002",
+      "snippet": {
+        "title": "Code With Andrea",
+        "description": "Flutter and Dart tutorials with a focus on clean architecture, testing, and best practices. Learn how to build high-quality Flutter applications from scratch.",
+        "customUrl": "@codewithandrea",
+        "publishedAt": "2019-03-20T14:30:00Z",
+        "thumbnails": {
+          "default": {
+            "url": "assets/images/channel_avatar.png",
+            "width": 88,
+            "height": 88
+          },
+          "medium": {
+            "url": "assets/images/channel_avatar.png",
+            "width": 240,
+            "height": 240
+          },
+          "high": {
+            "url": "assets/images/channel_avatar.png",
+            "width": 800,
+            "height": 800
+          }
+        },
+        "localized": {
+          "title": "Code With Andrea",
+          "description": "Flutter and Dart tutorials with a focus on clean architecture, testing, and best practices. Learn how to build high-quality Flutter applications from scratch."
+        },
+        "country": "IT"
+      },
+      "contentDetails": {
+        "relatedPlaylists": {
+          "likes": "",
+          "uploads": "UU_x5XG1OV2P6uZZ5FSM9Ttw"
+        }
+      },
+      "statistics": {
+        "viewCount": "12345678",
+        "subscriberCount": "450000",
+        "hiddenSubscriberCount": false,
+        "videoCount": "210"
+      },
+      "brandingSettings": {
+        "channel": {
+          "title": "Code With Andrea",
+          "description": "Flutter and Dart tutorials with a focus on clean architecture, testing, and best practices. Learn how to build high-quality Flutter applications from scratch.",
+          "keywords": "flutter,dart,clean architecture,testing,mobile development",
+          "defaultLanguage": "en",
+          "country": "IT"
+        },
+        "image": {
+          "bannerExternalUrl": "assets/images/channel_banner.jpg"
+        }
+      }
+    },
+    {
+      "kind": "youtube#channel",
+      "etag": "mock_etag_channel_3",
+      "id": "channel003",
+      "snippet": {
+        "title": "Flutter Mapp",
+        "description": "Learn Flutter development with practical examples and real-world applications. From beginner to advanced topics, we cover everything you need to become a Flutter expert.",
+        "customUrl": "@fluttermapp",
+        "publishedAt": "2020-05-10T09:15:00Z",
+        "thumbnails": {
+          "default": {
+            "url": "assets/images/channel_avatar.png",
+            "width": 88,
+            "height": 88
+          },
+          "medium": {
+            "url": "assets/images/channel_avatar.png",
+            "width": 240,
+            "height": 240
+          },
+          "high": {
+            "url": "assets/images/channel_avatar.png",
+            "width": 800,
+            "height": 800
+          }
+        },
+        "localized": {
+          "title": "Flutter Mapp",
+          "description": "Learn Flutter development with practical examples and real-world applications. From beginner to advanced topics, we cover everything you need to become a Flutter expert."
+        },
+        "country": "DE"
+      },
+      "contentDetails": {
+        "relatedPlaylists": {
+          "likes": "",
+          "uploads": "UU_x5XG1OV2P6uZZ5FSM9Ttw"
+        }
+      },
+      "statistics": {
+        "viewCount": "8765432",
+        "subscriberCount": "320000",
+        "hiddenSubscriberCount": false,
+        "videoCount": "180"
+      },
+      "brandingSettings": {
+        "channel": {
+          "title": "Flutter Mapp",
+          "description": "Learn Flutter development with practical examples and real-world applications. From beginner to advanced topics, we cover everything you need to become a Flutter expert.",
+          "keywords": "flutter,dart,mobile development,getx,state management",
+          "defaultLanguage": "en",
+          "country": "DE"
+        },
+        "image": {
+          "bannerExternalUrl": "assets/images/channel_banner.jpg"
+        }
+      }
+    }
+  ]
+}
