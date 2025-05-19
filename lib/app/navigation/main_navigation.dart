@@ -1,76 +1,96 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../../core/theme/app_colors.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
-import '../../features/shorts/presentation/screens/shorts_screen.dart';
+import '../../features/explore/presentation/screens/explore_screen.dart';
 import '../../features/subscription/presentation/screens/subscription_screen.dart';
 import '../../features/library/presentation/screens/library_screen.dart';
-import '../../features/upload/presentation/screens/upload_screen.dart';
+import '../../features/youtube_search/presentation/screens/downloads_screen.dart';
 import '../routes/app_routes.dart';
 
 /// Controller for the main navigation
 class MainNavigationController extends GetxController {
   // Observable variables
   final RxInt selectedIndex = 0.obs;
+  final RxBool isVideoPlayerActive = false.obs;
+  final RxBool isFullScreenActive = false.obs;
+
+  // Navigation history for back button handling
+  final RxList<int> navigationHistory = <int>[0].obs;
 
   // Screens list
   final List<Widget> screens = [
     const HomeScreen(),
-    const ShortsScreen(),
-    const UploadScreen(),
+    const ExploreScreen(),
     const SubscriptionScreen(),
     const LibraryScreen(),
+    const DownloadsScreen(),
   ];
 
-  // Computed property for whether we're on the shorts screen
-  bool get isShortScreen => selectedIndex.value == 1;
+  // Screen routes for deep linking
+  final List<String> screenRoutes = [
+    AppRoutes.home,
+    AppRoutes.explore,
+    AppRoutes.subscription,
+    AppRoutes.library,
+    AppRoutes.downloads,
+  ];
 
   // Change the selected tab
   void changeTab(int index) {
-    if (index == 2) {
-      showUploadOptions();
-      return;
-    }
+    // Don't add to history if selecting the same tab
+    if (selectedIndex.value != index) {
+      // Add current index to history before changing
+      navigationHistory.add(selectedIndex.value);
 
-    selectedIndex.value = index;
+      // Update the selected index
+      selectedIndex.value = index;
+
+      // Update route in GetX navigation system for deep linking support
+      Get.offNamed(screenRoutes[index], preventDuplicates: false);
+    }
   }
 
-  // Show upload options
-  void showUploadOptions() {
-    Get.bottomSheet(
-      Container(
-        color: Colors.white,
-        child: Wrap(
-          children: [
-            ListTile(
-              leading: const Icon(Icons.videocam),
-              title: const Text('Create a video'),
-              onTap: () {
-                Get.back();
-                // Navigate to video creation
-                Get.toNamed(AppRoutes.upload);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.music_note),
-              title: const Text('Create a Short'),
-              onTap: () {
-                Get.back();
-                // Navigate to Short creation
-                Get.toNamed(AppRoutes.shorts);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.live_tv),
-              title: const Text('Go live'),
-              onTap: () {
-                Get.back();
-                // Navigate to live streaming
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+  // Handle back button press
+  bool handleBackButton() {
+    // If we're in a video player or fullscreen mode, handle differently
+    if (isVideoPlayerActive.value || isFullScreenActive.value) {
+      isVideoPlayerActive.value = false;
+      isFullScreenActive.value = false;
+      return true; // Prevent default back behavior
+    }
+
+    // If we have navigation history, go back to previous tab
+    if (navigationHistory.length > 1) {
+      // Get the previous index
+      final previousIndex = navigationHistory.removeLast();
+
+      // Update the selected index without adding to history
+      selectedIndex.value = previousIndex;
+
+      // Update route in GetX navigation system
+      Get.offNamed(screenRoutes[previousIndex], preventDuplicates: false);
+
+      return true; // Prevent default back behavior
+    }
+
+    return false; // Allow default back behavior (exit app)
+  }
+
+  // Set video player state
+  void setVideoPlayerActive(bool active) {
+    isVideoPlayerActive.value = active;
+  }
+
+  // Set fullscreen state
+  void setFullScreenActive(bool active) {
+    isFullScreenActive.value = active;
+  }
+
+  // Check if navigation bar should be hidden
+  bool shouldHideNavBar() {
+    return isVideoPlayerActive.value || isFullScreenActive.value;
   }
 }
 
@@ -82,40 +102,73 @@ class MainNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     // Initialize the controller
     final controller = Get.put(MainNavigationController());
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    return Obx(() => Scaffold(
-      body: controller.screens[controller.selectedIndex.value],
-      bottomNavigationBar: controller.isShortScreen
-          ? null
-          : BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              selectedItemColor: Colors.black,
-              unselectedItemColor: Colors.grey,
-              currentIndex: controller.selectedIndex.value,
-              onTap: controller.changeTab,
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
+    return Obx(() {
+      return Scaffold(
+        body: IndexedStack(
+          index: controller.selectedIndex.value,
+          children: controller.screens,
+        ),
+        bottomNavigationBar: controller.shouldHideNavBar()
+            ? null
+            : Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 8,
+                      offset: const Offset(0, -2),
+                    ),
+                  ],
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.play_circle_outline),
-                  label: 'Shorts',
+                child: BottomNavigationBar(
+                  type: BottomNavigationBarType.fixed,
+                  backgroundColor: isDarkMode ? AppColors.backgroundDark : AppColors.background,
+                  selectedItemColor: isDarkMode ? AppColors.primaryLight : AppColors.primary,
+                  unselectedItemColor: isDarkMode
+                      ? AppColors.textLight.withValues(alpha: 0.7)
+                      : AppColors.textSecondary,
+                  selectedLabelStyle: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  unselectedLabelStyle: TextStyle(
+                    fontSize: 12.sp,
+                  ),
+                  currentIndex: controller.selectedIndex.value,
+                  elevation: 8,
+                  onTap: controller.changeTab,
+                  items: const [
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.home_outlined),
+                      activeIcon: Icon(Icons.home),
+                      label: 'Home',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.explore_outlined),
+                      activeIcon: Icon(Icons.explore),
+                      label: 'Explore',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.subscriptions_outlined),
+                      activeIcon: Icon(Icons.subscriptions),
+                      label: 'Subscriptions',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.video_library_outlined),
+                      activeIcon: Icon(Icons.video_library),
+                      label: 'Library',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.download_outlined),
+                      activeIcon: Icon(Icons.download),
+                      label: 'Downloads',
+                    ),
+                  ],
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.add_circle_outline, size: 40),
-                  label: '',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.subscriptions_outlined),
-                  label: 'Subscription',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.video_library_outlined),
-                  label: 'Library',
-                ),
-              ],
-            ),
-    ));
+              ),
+      );
+    });
   }
 }

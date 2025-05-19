@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../app/di/dependency_injection.dart';
+import '../../../../app/navigation/navigation_service.dart';
 import '../../../../core/widgets/bluetube_app_bar.dart';
 import '../controllers/explore_controller.dart';
 import '../widgets/explore_category_card.dart';
@@ -127,6 +128,7 @@ class ExploreScreen extends StatelessWidget {
   }
 
   Widget _buildTrendingVideosSection(ExploreController controller) {
+    final navigationService = Get.find<NavigationService>();
     if (controller.isVideosLoading.value) {
       return SizedBox(
         height: 300.h,
@@ -183,6 +185,7 @@ class ExploreScreen extends StatelessWidget {
           video: video,
           onTap: () {
             // Navigate to video player
+            navigationService.navigateToVideoPlayer(video.id);
           },
         );
       },
@@ -190,6 +193,7 @@ class ExploreScreen extends StatelessWidget {
   }
 
   Widget _buildCategoryVideosSection(ExploreController controller) {
+    final navigationService = Get.find<NavigationService>();
     if (controller.isVideosLoading.value) {
       return SizedBox(
         height: 300.h,
@@ -223,6 +227,7 @@ class ExploreScreen extends StatelessWidget {
           isHorizontal: true,
           onTap: () {
             // Navigate to video player
+            navigationService.navigateToVideoPlayer(video.id);
           },
         );
       },

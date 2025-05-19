@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../../app/routes/app_routes.dart';
+import '../../../../app/navigation/navigation_service.dart';
 import '../controllers/downloads_controller.dart';
 import '../widgets/downloaded_video_card.dart';
 
@@ -23,19 +23,19 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
     _controller.loadDownloadedVideos();
   }
 
+  // Get navigation service
+  NavigationService get _navigationService => Get.find<NavigationService>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Downloads'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Get.back(),
-        ),
+        // No leading back button needed for main navigation tab
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            onPressed: () => Get.toNamed(AppRoutes.youtubeSearch),
+            onPressed: () => _navigationService.navigateToSearch(),
             tooltip: 'Search Videos',
           ),
         ],
@@ -170,10 +170,7 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
             onTap: () {
               // Play the downloaded video
               // In a real app, this would play the local file
-              Get.toNamed(
-                AppRoutes.youtubeVideoPlayer,
-                parameters: {'videoId': video.id},
-              );
+              _navigationService.navigateToVideoPlayer(video.id);
             },
             onDelete: () async {
               await _controller.deleteVideo(video.id);
@@ -212,7 +209,7 @@ class _DownloadsScreenState extends State<DownloadsScreen> {
           ),
           SizedBox(height: 24.h),
           ElevatedButton(
-            onPressed: () => Get.toNamed(AppRoutes.youtubeSearch),
+            onPressed: () => _navigationService.navigateToSearch(),
             child: const Text('Search Videos'),
           ),
         ],

@@ -2,6 +2,8 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:get/get.dart';
+import '../navigation/navigation_service.dart';
 
 // Library feature
 import '../../features/library/data/datasources/library_local_data_source.dart';
@@ -298,6 +300,9 @@ Future<void> init() async {
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => GetStorage());
   sl.registerLazySingleton(() => DefaultCacheManager());
+
+  // Navigation Service
+  await Get.putAsync<NavigationService>(() => NavigationService().init());
 
   //! Features - Authentication
   // Controllers
