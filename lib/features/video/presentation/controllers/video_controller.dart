@@ -97,7 +97,7 @@ class VideoController extends GetxController {
     errorMessage.value = null;
 
     // Load video details
-    final detailResult = await getVideoDetail(videoId);
+    final detailResult = await getVideoDetail(GetVideoDetailParams(videoId: videoId));
 
     detailResult.fold(
       (failure) {
@@ -122,7 +122,7 @@ class VideoController extends GetxController {
   Future<void> loadComments(String videoId) async {
     isCommentsLoading.value = true;
 
-    final commentsResult = await getVideoComments(videoId);
+    final commentsResult = await getVideoComments(GetVideoCommentsParams(videoId: videoId));
 
     commentsResult.fold(
       (failure) {
@@ -141,7 +141,7 @@ class VideoController extends GetxController {
   Future<void> loadRelatedVideos(String videoId) async {
     isRelatedVideosLoading.value = true;
 
-    final relatedResult = await getRelatedVideos(videoId);
+    final relatedResult = await getRelatedVideos(GetRelatedVideosParams(videoId: videoId));
 
     relatedResult.fold(
       (failure) {
@@ -263,7 +263,7 @@ class VideoController extends GetxController {
 
     if (videoDetail.value!.isLiked) {
       // If already liked, remove the like
-      final result = await removeLikeDislike(videoId);
+      final result = await removeLikeDislike(RemoveLikeDislikeParams(videoId: videoId));
 
       result.fold(
         (failure) {
@@ -277,7 +277,7 @@ class VideoController extends GetxController {
       );
     } else {
       // Like the video
-      final result = await likeVideo(videoId);
+      final result = await likeVideo(LikeVideoParams(videoId: videoId));
 
       result.fold(
         (failure) {
@@ -303,7 +303,7 @@ class VideoController extends GetxController {
 
     if (videoDetail.value!.isDisliked) {
       // If already disliked, remove the dislike
-      final result = await removeLikeDislike(videoId);
+      final result = await removeLikeDislike(RemoveLikeDislikeParams(videoId: videoId));
 
       result.fold(
         (failure) {
@@ -317,7 +317,7 @@ class VideoController extends GetxController {
       );
     } else {
       // Dislike the video
-      final result = await dislikeVideo(videoId);
+      final result = await dislikeVideo(DislikeVideoParams(videoId: videoId));
 
       result.fold(
         (failure) {
@@ -343,7 +343,7 @@ class VideoController extends GetxController {
 
     if (videoDetail.value!.isSubscribed) {
       // Unsubscribe from the channel
-      final result = await unsubscribeFromChannel(channelId);
+      final result = await unsubscribeFromChannel(UnsubscribeFromChannelParams(channelId: channelId));
 
       result.fold(
         (failure) {
@@ -357,7 +357,7 @@ class VideoController extends GetxController {
       );
     } else {
       // Subscribe to the channel
-      final result = await subscribeToChannel(channelId);
+      final result = await subscribeToChannel(SubscribeToChannelParams(channelId: channelId));
 
       result.fold(
         (failure) {
@@ -379,7 +379,7 @@ class VideoController extends GetxController {
     isAddingComment.value = true;
 
     final videoId = videoDetail.value!.id;
-    final result = await addComment(videoId, commentText.value);
+    final result = await addComment(AddCommentParams(videoId: videoId, text: commentText.value));
 
     result.fold(
       (failure) {
@@ -405,7 +405,7 @@ class VideoController extends GetxController {
 
     if (comment.isLiked) {
       // Unlike the comment
-      final result = await unlikeComment(commentId);
+      final result = await unlikeComment(UnlikeCommentParams(commentId: commentId));
 
       result.fold(
         (failure) {
@@ -434,7 +434,7 @@ class VideoController extends GetxController {
       );
     } else {
       // Like the comment
-      final result = await likeComment(commentId);
+      final result = await likeComment(LikeCommentParams(commentId: commentId));
 
       result.fold(
         (failure) {
