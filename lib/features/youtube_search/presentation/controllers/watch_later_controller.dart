@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../../../../core/usecases/usecase.dart';
 import '../../domain/entities/saved_video.dart';
 import '../../domain/entities/youtube_video.dart';
 import '../../domain/usecases/get_saved_videos.dart';
@@ -38,7 +39,7 @@ class WatchLaterController extends GetxController {
     isLoading.value = true;
     errorMessage.value = '';
 
-    final result = await getSavedVideos();
+    final result = await getSavedVideos(const NoParams());
 
     isLoading.value = false;
 
@@ -78,7 +79,7 @@ class WatchLaterController extends GetxController {
           // Update local state
           videos.add(savedVideo);
           savedStatus[video.id] = true;
-          
+
           Get.snackbar(
             'Success',
             'Video added to Watch Later',
@@ -104,7 +105,7 @@ class WatchLaterController extends GetxController {
           // Update local state
           videos.removeWhere((v) => v.id == videoId);
           savedStatus[videoId] = false;
-          
+
           Get.snackbar(
             'Success',
             'Video removed from Watch Later',
@@ -123,7 +124,7 @@ class WatchLaterController extends GetxController {
       return savedStatus[videoId]!;
     }
 
-    final result = await isVideoSaved(videoId);
+    final result = await isVideoSaved(IsVideoSavedParams(videoId: videoId));
 
     return result.fold(
       (failure) {

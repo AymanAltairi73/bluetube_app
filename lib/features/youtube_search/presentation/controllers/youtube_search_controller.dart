@@ -21,18 +21,18 @@ class YouTubeSearchController extends GetxController {
   final RxString errorMessage = ''.obs;
   final RxString searchQuery = ''.obs;
   final RxBool hasMoreResults = true.obs;
-  
+
   // Pagination variables
   String? _nextPageToken;
   String? _prevPageToken;
   int _totalResults = 0;
-  
+
   /// Search for videos by query
   Future<void> search(String query) async {
     if (query.isEmpty) {
       return;
     }
-    
+
     // Reset state
     videos.clear();
     isLoading.value = true;
@@ -42,14 +42,16 @@ class YouTubeSearchController extends GetxController {
     _prevPageToken = null;
     _totalResults = 0;
     hasMoreResults.value = true;
-    
+
     final result = await searchVideos(
-      query,
-      maxResults: ApiConfig.defaultMaxResults,
+      SearchVideosParams(
+        query: query,
+        maxResults: ApiConfig.defaultMaxResults,
+      ),
     );
-    
+
     isLoading.value = false;
-    
+
     result.fold(
       (failure) {
         errorMessage.value = failure.message;
@@ -60,23 +62,25 @@ class YouTubeSearchController extends GetxController {
       },
     );
   }
-  
+
   /// Load more search results
   Future<void> loadMore() async {
     if (isLoading.value || isLoadingMore.value || !hasMoreResults.value) {
       return;
     }
-    
+
     isLoadingMore.value = true;
-    
+
     final result = await searchVideos(
-      searchQuery.value,
-      pageToken: _nextPageToken,
-      maxResults: ApiConfig.defaultMaxResults,
+      SearchVideosParams(
+        query: searchQuery.value,
+        pageToken: _nextPageToken,
+        maxResults: ApiConfig.defaultMaxResults,
+      ),
     );
-    
+
     isLoadingMore.value = false;
-    
+
     result.fold(
       (failure) {
         errorMessage.value = failure.message;
@@ -87,16 +91,16 @@ class YouTubeSearchController extends GetxController {
       },
     );
   }
-  
+
   /// Get video details by ID
   Future<YouTubeVideo?> getVideoById(String videoId) async {
     isLoading.value = true;
     errorMessage.value = '';
-    
-    final result = await getVideoDetails(videoId);
-    
+
+    final result = await getVideoDetails(GetVideoDetailsParams(videoId: videoId));
+
     isLoading.value = false;
-    
+
     return result.fold(
       (failure) {
         errorMessage.value = failure.message;
@@ -105,12 +109,12 @@ class YouTubeSearchController extends GetxController {
       (video) => video,
     );
   }
-  
+
   /// Check if there are more results to load
   void _checkHasMoreResults() {
     hasMoreResults.value = _nextPageToken != null && videos.length < _totalResults;
   }
-  
+
   /// Clear search results
   void clearSearch() {
     videos.clear();
