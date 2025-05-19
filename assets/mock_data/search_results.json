@@ -1,0 +1,114 @@
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "mock_etag_search",
+  "nextPageToken": "mock_next_page_token",
+  "prevPageToken": null,
+  "pageInfo": {
+    "totalResults": 50,
+    "resultsPerPage": 10
+  },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "mock_etag_1",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "video001"
+      },
+      "snippet": {
+        "publishedAt": "2023-06-15T14:00:00Z",
+        "channelId": "channel001",
+        "title": "Flutter 3.0 - What's New and Amazing Features",
+        "description": "Flutter 3.0 is here with amazing new features! In this video, we explore all the exciting updates and improvements in the latest version of Flutter.",
+        "thumbnails": {
+          "default": {
+            "url": "assets/images/thumbnails/flutter_3.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "assets/images/thumbnails/flutter_3.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "assets/images/thumbnails/flutter_3.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Flutter Dev",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-06-15T14:00:00Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "mock_etag_2",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "video002"
+      },
+      "snippet": {
+        "publishedAt": "2023-06-14T10:30:00Z",
+        "channelId": "channel002",
+        "title": "Clean Architecture in Flutter - Complete Guide",
+        "description": "Learn how to implement Clean Architecture in your Flutter applications. This comprehensive guide covers everything from project structure to practical implementation.",
+        "thumbnails": {
+          "default": {
+            "url": "assets/images/thumbnails/clean_architecture.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "assets/images/thumbnails/clean_architecture.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "assets/images/thumbnails/clean_architecture.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Code With Andrea",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-06-14T10:30:00Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "mock_etag_3",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "video003"
+      },
+      "snippet": {
+        "publishedAt": "2023-06-13T08:45:00Z",
+        "channelId": "channel003",
+        "title": "GetX State Management in Flutter - From Zero to Hero",
+        "description": "Master GetX state management in Flutter with this comprehensive tutorial. Learn how to manage state, navigation, dependencies, and more with GetX.",
+        "thumbnails": {
+          "default": {
+            "url": "assets/images/thumbnails/getx.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "assets/images/thumbnails/getx.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "assets/images/thumbnails/getx.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Flutter Mapp",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-06-13T08:45:00Z"
+      }
+    }
+  ]
+}

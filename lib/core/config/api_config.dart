@@ -1,22 +1,23 @@
-/// Configuration for API services
+/// Configuration for mock data services and API parameters
 class ApiConfig {
-  /// YouTube Data API key
-  /// Note: In a production app, this should be stored securely
-  /// and not hardcoded in the source code
-  static const String youtubeApiKey = 'AIzaSyBKKkCHt1AX9sxK7_0oAK4IcVvWpY557D8';
-  
-  /// YouTube Data API base URL
-  static const String youtubeBaseUrl = 'https://www.googleapis.com/youtube/v3';
-  
   /// Default maximum results per page
   static const int defaultMaxResults = 10;
-  
+
   /// Default search type
   static const String defaultSearchType = 'video';
-  
+
   /// Default video part
   static const String defaultVideoPart = 'snippet,contentDetails,statistics';
-  
+
   /// Default search part
   static const String defaultSearchPart = 'snippet';
+
+  /// Simulated network delay range in milliseconds (min)
+  static const int minNetworkDelay = 200;
+
+  /// Simulated network delay range in milliseconds (max)
+  static const int maxNetworkDelay = 800;
+
+  /// Probability of simulated network error (0.0 to 1.0)
+  static const double errorProbability = 0.1;
 }

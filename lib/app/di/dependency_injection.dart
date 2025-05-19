@@ -12,6 +12,7 @@ import '../../features/library/presentation/controllers/library_controller.dart'
 
 // YouTube Search feature
 import '../../features/youtube_search/data/datasources/youtube_api_data_source.dart';
+import '../../features/youtube_search/data/datasources/youtube_local_data_source.dart';
 import '../../features/youtube_search/data/repositories/youtube_search_repository_impl.dart';
 import '../../features/youtube_search/domain/repositories/youtube_search_repository.dart';
 import '../../features/youtube_search/domain/usecases/search_videos.dart';
@@ -290,7 +291,7 @@ Future<void> init() async {
 
   // Data sources
   sl.registerLazySingleton<YouTubeApiDataSource>(
-    () => YouTubeApiDataSourceImpl(client: sl()),
+    () => YouTubeLocalDataSourceImpl(),
   );
 
   // External

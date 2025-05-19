@@ -1,0 +1,165 @@
+{
+  "kind": "youtube#videoListResponse",
+  "etag": "mock_etag_videos_by_category",
+  "nextPageToken": "mock_next_page_token",
+  "prevPageToken": null,
+  "pageInfo": {
+    "totalResults": 50,
+    "resultsPerPage": 10
+  },
+  "items": [
+    {
+      "kind": "youtube#video",
+      "etag": "mock_etag_category_video_1",
+      "id": "video008",
+      "snippet": {
+        "publishedAt": "2023-06-12T10:15:00Z",
+        "channelId": "channel004",
+        "title": "Flutter Web Development - Complete Course",
+        "description": "Learn how to build responsive web applications with Flutter. This comprehensive course covers everything from setup to deployment.",
+        "thumbnails": {
+          "default": {
+            "url": "assets/images/thumbnails/flutter_web.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "assets/images/thumbnails/flutter_web.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "assets/images/thumbnails/flutter_web.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Flutter Academy",
+        "tags": ["flutter", "web development", "responsive design", "dart"],
+        "categoryId": "28",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Flutter Web Development - Complete Course",
+          "description": "Learn how to build responsive web applications with Flutter. This comprehensive course covers everything from setup to deployment."
+        }
+      },
+      "statistics": {
+        "viewCount": "543210",
+        "likeCount": "45678",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "5432"
+      },
+      "contentDetails": {
+        "duration": "PT1H45M20S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "true",
+        "licensedContent": true,
+        "projection": "rectangular"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "mock_etag_category_video_2",
+      "id": "video009",
+      "snippet": {
+        "publishedAt": "2023-06-11T14:30:00Z",
+        "channelId": "channel005",
+        "title": "Dart 3.0 Features - Null Safety and More",
+        "description": "Explore the latest features in Dart 3.0, including sound null safety, pattern matching, and more. Learn how these features improve your Flutter development experience.",
+        "thumbnails": {
+          "default": {
+            "url": "assets/images/thumbnails/dart_3.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "assets/images/thumbnails/dart_3.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "assets/images/thumbnails/dart_3.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Dart Tutorials",
+        "tags": ["dart", "null safety", "pattern matching", "flutter"],
+        "categoryId": "28",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Dart 3.0 Features - Null Safety and More",
+          "description": "Explore the latest features in Dart 3.0, including sound null safety, pattern matching, and more. Learn how these features improve your Flutter development experience."
+        }
+      },
+      "statistics": {
+        "viewCount": "432109",
+        "likeCount": "34567",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "4321"
+      },
+      "contentDetails": {
+        "duration": "PT55M15S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "true",
+        "licensedContent": true,
+        "projection": "rectangular"
+      }
+    },
+    {
+      "kind": "youtube#video",
+      "etag": "mock_etag_category_video_3",
+      "id": "video010",
+      "snippet": {
+        "publishedAt": "2023-06-10T09:45:00Z",
+        "channelId": "channel006",
+        "title": "Flutter Testing Masterclass - Unit, Widget, and Integration Tests",
+        "description": "Master testing in Flutter with this comprehensive guide. Learn how to write unit tests, widget tests, and integration tests to ensure your app's quality and reliability.",
+        "thumbnails": {
+          "default": {
+            "url": "assets/images/thumbnails/flutter_testing.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "assets/images/thumbnails/flutter_testing.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "assets/images/thumbnails/flutter_testing.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Test Driven Flutter",
+        "tags": ["flutter", "testing", "unit tests", "widget tests", "integration tests"],
+        "categoryId": "28",
+        "liveBroadcastContent": "none",
+        "localized": {
+          "title": "Flutter Testing Masterclass - Unit, Widget, and Integration Tests",
+          "description": "Master testing in Flutter with this comprehensive guide. Learn how to write unit tests, widget tests, and integration tests to ensure your app's quality and reliability."
+        }
+      },
+      "statistics": {
+        "viewCount": "321098",
+        "likeCount": "23456",
+        "dislikeCount": "0",
+        "favoriteCount": "0",
+        "commentCount": "3210"
+      },
+      "contentDetails": {
+        "duration": "PT1H20M10S",
+        "dimension": "2d",
+        "definition": "hd",
+        "caption": "true",
+        "licensedContent": true,
+        "projection": "rectangular"
+      }
+    }
+  ]
+}

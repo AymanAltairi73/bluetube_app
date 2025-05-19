@@ -1,0 +1,148 @@
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "mock_etag_related",
+  "nextPageToken": "mock_next_page_token",
+  "prevPageToken": null,
+  "pageInfo": {
+    "totalResults": 50,
+    "resultsPerPage": 10
+  },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "mock_etag_related_1",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "video004"
+      },
+      "snippet": {
+        "publishedAt": "2023-06-10T09:15:00Z",
+        "channelId": "channel001",
+        "title": "Flutter 3.0 Performance Optimization Tips",
+        "description": "Learn how to optimize your Flutter 3.0 applications for maximum performance. This video covers best practices, common pitfalls, and advanced techniques.",
+        "thumbnails": {
+          "default": {
+            "url": "assets/images/thumbnails/flutter_performance.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "assets/images/thumbnails/flutter_performance.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "assets/images/thumbnails/flutter_performance.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Flutter Dev",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-06-10T09:15:00Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "mock_etag_related_2",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "video005"
+      },
+      "snippet": {
+        "publishedAt": "2023-06-08T14:30:00Z",
+        "channelId": "channel001",
+        "title": "Material 3 in Flutter - Complete Design System Guide",
+        "description": "Explore the new Material 3 design system in Flutter. Learn how to implement the latest Material Design guidelines in your Flutter applications.",
+        "thumbnails": {
+          "default": {
+            "url": "assets/images/thumbnails/material_3.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "assets/images/thumbnails/material_3.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "assets/images/thumbnails/material_3.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Flutter Dev",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-06-08T14:30:00Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "mock_etag_related_3",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "video006"
+      },
+      "snippet": {
+        "publishedAt": "2023-06-05T11:45:00Z",
+        "channelId": "channel002",
+        "title": "Flutter Clean Architecture with Riverpod",
+        "description": "Learn how to implement Clean Architecture in Flutter using Riverpod for state management. This tutorial covers the complete implementation from scratch.",
+        "thumbnails": {
+          "default": {
+            "url": "assets/images/thumbnails/riverpod.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "assets/images/thumbnails/riverpod.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "assets/images/thumbnails/riverpod.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Code With Andrea",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-06-05T11:45:00Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "mock_etag_related_4",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "video007"
+      },
+      "snippet": {
+        "publishedAt": "2023-06-03T16:20:00Z",
+        "channelId": "channel003",
+        "title": "Flutter State Management Comparison - GetX vs Riverpod vs Bloc",
+        "description": "Compare the most popular state management solutions in Flutter: GetX, Riverpod, and Bloc. Learn the pros and cons of each approach and when to use them.",
+        "thumbnails": {
+          "default": {
+            "url": "assets/images/thumbnails/state_management.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "assets/images/thumbnails/state_management.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "assets/images/thumbnails/state_management.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Flutter Mapp",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-06-03T16:20:00Z"
+      }
+    }
+  ]
+}
