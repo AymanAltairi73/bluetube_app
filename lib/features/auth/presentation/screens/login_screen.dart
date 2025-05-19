@@ -98,8 +98,8 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CircleAvatar(
-                            radius: 30.r,
-                            backgroundColor: isDarkMode ? Colors.grey[800] : Colors.grey[200],
+                            //radius: 30.r,
+                            //backgroundColor: isDarkMode ? Colors.grey[800] : Colors.grey[200],
                             child: Image.asset(
                               'assets/images/logo.png',
                               width: 40.w,
