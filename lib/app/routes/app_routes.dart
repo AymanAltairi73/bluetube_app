@@ -7,10 +7,7 @@ class AppRoutes {
   static const library = '/library';
   static const upload = '/upload';
   static const explore = '/explore';
-  static const videoDetail = '/video-detail';
   static const video = '/video';
-  static const channelDetail = '/channel-detail';
-  static const search = '/search';
   static const settings = '/settings';
 
   // YouTube search routes
