@@ -12,6 +12,9 @@ class ApiConfig {
   /// Default search part
   static const String defaultSearchPart = 'snippet';
 
+  /// Default region code
+  static const String defaultRegionCode = 'US';
+
   /// Simulated network delay range in milliseconds (min)
   static const int minNetworkDelay = 200;
 

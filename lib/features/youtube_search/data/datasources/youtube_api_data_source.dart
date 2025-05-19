@@ -13,4 +13,16 @@ abstract class YouTubeApiDataSource {
 
   /// Get video details by ID
   Future<YouTubeVideoDetailsResponseModel> getVideoDetails(String videoId);
+
+  /// Get channel details by ID
+  Future<Map<String, dynamic>> getChannelDetails(String channelId);
+
+  /// Get trending videos
+  Future<YouTubeVideoDetailsResponseModel> getTrendingVideos();
+
+  /// Get videos by category
+  Future<YouTubeVideoDetailsResponseModel> getVideosByCategory(String categoryId);
+
+  /// Get video comments
+  Future<Map<String, dynamic>> getVideoComments(String videoId);
 }

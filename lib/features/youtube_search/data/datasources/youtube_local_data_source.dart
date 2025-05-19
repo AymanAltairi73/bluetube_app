@@ -199,6 +199,7 @@ class YouTubeLocalDataSourceImpl implements YouTubeApiDataSource {
   }
 
   /// Get trending videos
+  @override
   Future<YouTubeVideoDetailsResponseModel> getTrendingVideos() async {
     await _simulateNetworkDelay();
 
@@ -214,6 +215,7 @@ class YouTubeLocalDataSourceImpl implements YouTubeApiDataSource {
   }
 
   /// Get videos by category
+  @override
   Future<YouTubeVideoDetailsResponseModel> getVideosByCategory(String categoryId) async {
     await _simulateNetworkDelay();
 
@@ -244,6 +246,7 @@ class YouTubeLocalDataSourceImpl implements YouTubeApiDataSource {
   }
 
   /// Get video comments
+  @override
   Future<Map<String, dynamic>> getVideoComments(String videoId) async {
     await _simulateNetworkDelay();
 
@@ -278,6 +281,7 @@ class YouTubeLocalDataSourceImpl implements YouTubeApiDataSource {
   }
 
   /// Get channel details
+  @override
   Future<Map<String, dynamic>> getChannelDetails(String channelId) async {
     await _simulateNetworkDelay();
 
