@@ -135,88 +135,138 @@ class _EnhancedVideoControlsState extends State<EnhancedVideoControls> {
   }
 
   void _showPlaybackSpeedOptions() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.black87,
-      builder: (context) => ListView(
-        shrinkWrap: true,
-        children: _playbackSpeeds.map((speed) {
-          return ListTile(
-            title: Text(
-              '${speed}x',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: _playbackSpeed.value == speed
-                    ? FontWeight.bold
-                    : FontWeight.normal,
+    try {
+      showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.black87,
+        builder: (context) => ListView(
+          shrinkWrap: true,
+          children: _playbackSpeeds.map((speed) {
+            return ListTile(
+              title: Text(
+                '${speed}x',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: _playbackSpeed.value == speed
+                      ? FontWeight.bold
+                      : FontWeight.normal,
+                ),
               ),
-            ),
-            trailing: _playbackSpeed.value == speed
-                ? const Icon(Icons.check, color: Colors.blue)
-                : null,
-            onTap: () {
-              widget.controller.setPlaybackRate(speed);
-              _playbackSpeed.value = speed;
-              Navigator.pop(context);
-            },
-          );
-        }).toList(),
-      ),
-    );
+              trailing: _playbackSpeed.value == speed
+                  ? const Icon(Icons.check, color: Colors.blue)
+                  : null,
+              onTap: () {
+                try {
+                  widget.controller.setPlaybackRate(speed);
+                  _playbackSpeed.value = speed;
+                  Navigator.pop(context);
+                } catch (e) {
+                  debugPrint('Error setting playback rate: $e');
+                  Navigator.pop(context);
+                  Get.snackbar(
+                    'Error',
+                    'Failed to change playback speed',
+                    snackPosition: SnackPosition.BOTTOM,
+                    backgroundColor: Colors.black54,
+                    colorText: Colors.white,
+                  );
+                }
+              },
+            );
+          }).toList(),
+        ),
+      );
+    } catch (e) {
+      debugPrint('Error showing playback speed options: $e');
+    }
   }
 
   void _showQualityOptions() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.black87,
-      builder: (context) => ListView(
-        shrinkWrap: true,
-        children: _qualities.map((quality) {
-          return ListTile(
-            title: Text(
-              quality,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: _selectedQuality.value == quality
-                    ? FontWeight.bold
-                    : FontWeight.normal,
+    try {
+      showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.black87,
+        builder: (context) => ListView(
+          shrinkWrap: true,
+          children: _qualities.map((quality) {
+            return ListTile(
+              title: Text(
+                quality,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: _selectedQuality.value == quality
+                      ? FontWeight.bold
+                      : FontWeight.normal,
+                ),
               ),
-            ),
-            trailing: _selectedQuality.value == quality
-                ? const Icon(Icons.check, color: Colors.blue)
-                : null,
-            onTap: () {
-              // YouTube Player Flutter doesn't directly support quality selection
-              // This would require custom implementation with the YouTube API
-              _selectedQuality.value = quality;
-              Navigator.pop(context);
+              trailing: _selectedQuality.value == quality
+                  ? const Icon(Icons.check, color: Colors.blue)
+                  : null,
+              onTap: () {
+                try {
+                  // YouTube Player Flutter doesn't directly support quality selection
+                  // This would require custom implementation with the YouTube API
+                  _selectedQuality.value = quality;
+                  Navigator.pop(context);
 
-              // Show a message that this is a mock implementation
-              Get.snackbar(
-                'Quality Selection',
-                'Changed quality to $quality (mock implementation)',
-                snackPosition: SnackPosition.BOTTOM,
-                backgroundColor: Colors.black54,
-                colorText: Colors.white,
-              );
-            },
-          );
-        }).toList(),
-      ),
-    );
+                  // Show a message that this is a mock implementation
+                  Get.snackbar(
+                    'Quality Selection',
+                    'Changed quality to $quality (mock implementation)',
+                    snackPosition: SnackPosition.BOTTOM,
+                    backgroundColor: Colors.black54,
+                    colorText: Colors.white,
+                  );
+                } catch (e) {
+                  debugPrint('Error setting video quality: $e');
+                  Navigator.pop(context);
+                  Get.snackbar(
+                    'Error',
+                    'Failed to change video quality',
+                    snackPosition: SnackPosition.BOTTOM,
+                    backgroundColor: Colors.black54,
+                    colorText: Colors.white,
+                  );
+                }
+              },
+            );
+          }).toList(),
+        ),
+      );
+    } catch (e) {
+      debugPrint('Error showing quality options: $e');
+    }
   }
 
   void _toggleCaptions() {
-    _captionsEnabled.value = !_captionsEnabled.value;
+    try {
+      _captionsEnabled.value = !_captionsEnabled.value;
 
-    // YouTube Player Flutter doesn't directly support captions control
-    // This would require custom implementation with the YouTube API
-    Get.snackbar(
-      'Captions',
-      'Captions ${_captionsEnabled.value ? 'enabled' : 'disabled'} (mock implementation)',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.black54,
-      colorText: Colors.white,
-    );
+      // YouTube Player Flutter doesn't directly support captions control
+      // This would require custom implementation with the YouTube API
+      Get.snackbar(
+        'Captions',
+        'Captions ${_captionsEnabled.value ? 'enabled' : 'disabled'} (mock implementation)',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black54,
+        colorText: Colors.white,
+      );
+
+      // In a real implementation, we would call the YouTube API to enable/disable captions
+      // For example:
+      // widget.controller.toggleCaptions(_captionsEnabled.value);
+    } catch (e) {
+      debugPrint('Error toggling captions: $e');
+      // Reset the value in case of error
+      _captionsEnabled.value = !_captionsEnabled.value;
+
+      Get.snackbar(
+        'Error',
+        'Failed to toggle captions',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black54,
+        colorText: Colors.white,
+      );
+    }
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../../../app/routes/app_routes.dart';
 import '../controllers/youtube_search_controller.dart';
@@ -74,22 +73,39 @@ class _YouTubeVideoPlayerScreenState extends State<YouTubeVideoPlayerScreen> {
       return;
     }
 
-    _playerController = YoutubePlayerController(
-      initialVideoId: widget.videoId,
-      flags: const YoutubePlayerFlags(
-        autoPlay: true,
-        mute: false,
-        enableCaption: true,
-        useHybridComposition: true,
-        forceHD: false,
-        loop: false,
-        isLive: false,
-        disableDragSeek: false,
-        hideControls: false,
-        hideThumbnail: false,
-        controlsVisibleAtStart: true,
-      ),
-    )..addListener(_playerListener);
+    try {
+      // Validate that the video ID is in the correct format
+      if (!RegExp(r'^[a-zA-Z0-9_-]{11}$').hasMatch(widget.videoId)) {
+        setState(() {
+          _errorMessage = 'Invalid YouTube video ID format';
+          _isLoading = false;
+        });
+        return;
+      }
+
+      _playerController = YoutubePlayerController(
+        initialVideoId: widget.videoId,
+        flags: const YoutubePlayerFlags(
+          autoPlay: true,
+          mute: false,
+          enableCaption: true,
+          useHybridComposition: true,
+          forceHD: false,
+          loop: false,
+          isLive: false,
+          disableDragSeek: false,
+          hideControls: false,
+          hideThumbnail: false,
+          controlsVisibleAtStart: true,
+        ),
+      )..addListener(_playerListener);
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'Failed to initialize player: ${e.toString()}';
+        _isLoading = false;
+      });
+      debugPrint('Error initializing YouTube player: $e');
+    }
   }
 
   void _playerListener() {
@@ -99,6 +115,8 @@ class _YouTubeVideoPlayerScreenState extends State<YouTubeVideoPlayerScreen> {
   }
 
   Future<void> _loadVideoDetails() async {
+    if (!mounted) return;
+
     setState(() {
       _isLoading = true;
       _errorMessage = '';
@@ -107,26 +125,54 @@ class _YouTubeVideoPlayerScreenState extends State<YouTubeVideoPlayerScreen> {
     try {
       final videoDetails = await _searchController.getVideoById(widget.videoId);
 
-      if (mounted) {
+      if (!mounted) return;
+
+      if (videoDetails == null) {
         setState(() {
-          _videoDetails = videoDetails;
+          _errorMessage = 'Video details not found';
           _isLoading = false;
         });
+        return;
       }
+
+      setState(() {
+        _videoDetails = videoDetails;
+        _isLoading = false;
+      });
     } catch (e) {
-      if (mounted) {
-        setState(() {
-          _errorMessage = 'Failed to load video details: ${e.toString()}';
-          _isLoading = false;
-        });
-      }
+      if (!mounted) return;
+
+      setState(() {
+        _errorMessage = 'Failed to load video details: ${e.toString()}';
+        _isLoading = false;
+      });
+
+      // Log the error for debugging
+      debugPrint('Error loading video details: $e');
     }
   }
 
   @override
   void dispose() {
-    _playerController.removeListener(_playerListener);
-    _playerController.dispose();
+    // Pause the player before disposing to prevent audio issues
+    if (_isPlayerReady) {
+      _playerController.pause();
+    }
+
+    // Remove listener first to prevent callbacks after disposal
+    try {
+      _playerController.removeListener(_playerListener);
+    } catch (e) {
+      debugPrint('Error removing listener: $e');
+    }
+
+    // Dispose player resources
+    try {
+      _playerController.dispose();
+    } catch (e) {
+      debugPrint('Error disposing YouTube player controller: $e');
+    }
+
     super.dispose();
   }
 
@@ -157,9 +203,23 @@ class _YouTubeVideoPlayerScreenState extends State<YouTubeVideoPlayerScreen> {
           _isPlayerReady = true;
         },
         onEnded: (data) {
-          // Show related videos or recommendations when video ends
-          _playerController.load(widget.videoId);
+          // When video ends, show a message and seek to beginning
+          _playerController.seekTo(const Duration(seconds: 0));
           _playerController.pause();
+
+          // Show a snackbar with options
+          Get.snackbar(
+            'Video Ended',
+            'Would you like to replay or see related videos?',
+            snackPosition: SnackPosition.BOTTOM,
+            duration: const Duration(seconds: 5),
+            mainButton: TextButton(
+              onPressed: () {
+                _playerController.play();
+              },
+              child: const Text('Replay'),
+            ),
+          );
         },
         topActions: [
           const SizedBox(width: 8.0),
@@ -433,26 +493,47 @@ class _YouTubeVideoPlayerScreenState extends State<YouTubeVideoPlayerScreen> {
 
     final videoUrl = 'https://www.youtube.com/watch?v=${widget.videoId}';
 
-    // Use share_plus to share the video URL
-    Share.share(
-      'Check out this video: ${_videoDetails!.title}\n$videoUrl',
-      subject: 'Sharing a YouTube video',
+    // Show a snackbar with the video URL
+    Get.snackbar(
+      'Share Video',
+      'Copy this link: $videoUrl',
+      snackPosition: SnackPosition.BOTTOM,
+      duration: const Duration(seconds: 5),
+      mainButton: TextButton(
+        onPressed: () {
+          Clipboard.setData(ClipboardData(text: videoUrl));
+          Get.snackbar(
+            'Copied',
+            'Video link copied to clipboard',
+            snackPosition: SnackPosition.BOTTOM,
+            duration: const Duration(seconds: 2),
+          );
+        },
+        child: const Text('Copy'),
+      ),
     );
   }
 
   void _togglePictureInPictureMode() async {
+    // Prevent multiple calls while transitioning
+    if (!mounted) return;
+
     // Toggle PIP mode state
     final bool enteringPipMode = !_isInPipMode.value;
-    _isInPipMode.value = enteringPipMode;
 
     if (enteringPipMode) {
       try {
+        // Update state before starting the transition
+        _isInPipMode.value = true;
+
         // Get current position before pausing
         final currentPosition = _playerController.value.position.inSeconds.toDouble();
         final bool wasPlaying = _playerController.value.isPlaying;
 
         // Pause the current player to prevent audio overlap
-        _playerController.pause();
+        if (_isPlayerReady) {
+          _playerController.pause();
+        }
 
         // Save player state before navigating
         final String videoId = widget.videoId;
@@ -463,10 +544,16 @@ class _YouTubeVideoPlayerScreenState extends State<YouTubeVideoPlayerScreen> {
             videoId: videoId,
             currentPosition: currentPosition,
             onClose: () {
-              _isInPipMode.value = false;
+              // This will be called when PIP is closed
+              if (mounted) {
+                _isInPipMode.value = false;
+              }
             },
             onExpand: () {
-              _isInPipMode.value = false;
+              // This will be called when PIP is expanded
+              if (mounted) {
+                _isInPipMode.value = false;
+              }
             },
           ),
           transition: Transition.fade,
@@ -476,28 +563,43 @@ class _YouTubeVideoPlayerScreenState extends State<YouTubeVideoPlayerScreen> {
         // Check if the widget is still mounted before proceeding
         if (!mounted) return;
 
+        // Reset PIP mode state
+        _isInPipMode.value = false;
+
         // If we got a position back, seek to it
         if (result != null && _isPlayerReady) {
-          _playerController.seekTo(Duration(seconds: result.toInt()));
+          try {
+            _playerController.seekTo(Duration(seconds: result.toInt()));
 
-          // Resume playback only if it was playing before
-          if (wasPlaying) {
-            _playerController.play();
+            // Resume playback only if it was playing before
+            if (wasPlaying) {
+              _playerController.play();
+            }
+          } catch (seekError) {
+            debugPrint('Error seeking to position: $seekError');
           }
         }
       } catch (e) {
         // Handle any exceptions
-        _isInPipMode.value = false;
-        Get.snackbar(
-          'Error',
-          'Failed to enter picture-in-picture mode: ${e.toString()}',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        if (mounted) {
+          _isInPipMode.value = false;
+          Get.snackbar(
+            'Error',
+            'Failed to enter picture-in-picture mode: ${e.toString()}',
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        }
+        debugPrint('Error toggling PIP mode: $e');
       }
+    } else {
+      // Just update state if we're exiting PIP mode
+      _isInPipMode.value = false;
     }
   }
 
   void _downloadVideo() {
+    if (!mounted) return;
+
     if (_videoDetails == null) {
       Get.snackbar(
         'Error',
@@ -512,18 +614,58 @@ class _YouTubeVideoPlayerScreenState extends State<YouTubeVideoPlayerScreen> {
 
       if (_isDownloaded.value) {
         // Delete the downloaded video
-        downloadsController.deleteVideo(_videoDetails!.id).then((success) {
-          if (success) {
-            _isDownloaded.value = false;
-          }
-        });
+        Get.dialog(
+          AlertDialog(
+            title: const Text('Remove Download'),
+            content: const Text('Are you sure you want to remove this downloaded video?'),
+            actions: [
+              TextButton(
+                onPressed: () => Get.back(),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                  _deleteDownloadedVideo(downloadsController);
+                },
+                child: const Text('Remove'),
+              ),
+            ],
+          ),
+        );
       } else {
-        // Download the video
-        downloadsController.downloadYouTubeVideo(_videoDetails!).then((success) {
-          if (success) {
-            _isDownloaded.value = true;
-          }
-        });
+        // Show quality selection dialog
+        Get.dialog(
+          AlertDialog(
+            title: const Text('Select Quality'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  title: const Text('720p (HD)'),
+                  onTap: () {
+                    Get.back();
+                    _startDownload(downloadsController, '720p');
+                  },
+                ),
+                ListTile(
+                  title: const Text('480p (SD)'),
+                  onTap: () {
+                    Get.back();
+                    _startDownload(downloadsController, '480p');
+                  },
+                ),
+                ListTile(
+                  title: const Text('360p (Low)'),
+                  onTap: () {
+                    Get.back();
+                    _startDownload(downloadsController, '360p');
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
       }
     } catch (e) {
       // DownloadsController not registered yet
@@ -532,6 +674,71 @@ class _YouTubeVideoPlayerScreenState extends State<YouTubeVideoPlayerScreen> {
         'Please try again later',
         snackPosition: SnackPosition.BOTTOM,
       );
+      debugPrint('Error accessing downloads controller: $e');
     }
+  }
+
+  void _deleteDownloadedVideo(DownloadsController controller) {
+    if (!mounted || _videoDetails == null) return;
+
+    controller.deleteVideo(_videoDetails!.id).then((success) {
+      if (!mounted) return;
+
+      if (success) {
+        _isDownloaded.value = false;
+        Get.snackbar(
+          'Success',
+          'Video removed from downloads',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } else {
+        Get.snackbar(
+          'Error',
+          'Failed to remove download',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
+    }).catchError((error) {
+      if (!mounted) return;
+
+      Get.snackbar(
+        'Error',
+        'Failed to remove download: $error',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      debugPrint('Error deleting downloaded video: $error');
+    });
+  }
+
+  void _startDownload(DownloadsController controller, String quality) {
+    if (!mounted || _videoDetails == null) return;
+
+    controller.downloadYouTubeVideo(_videoDetails!, quality: quality).then((success) {
+      if (!mounted) return;
+
+      if (success) {
+        _isDownloaded.value = true;
+        Get.snackbar(
+          'Success',
+          'Video downloaded successfully',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } else {
+        Get.snackbar(
+          'Error',
+          'Failed to download video',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
+    }).catchError((error) {
+      if (!mounted) return;
+
+      Get.snackbar(
+        'Error',
+        'Failed to download video: $error',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      debugPrint('Error downloading video: $error');
+    });
   }
 }

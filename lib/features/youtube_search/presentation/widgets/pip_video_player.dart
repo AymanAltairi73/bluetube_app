@@ -39,13 +39,24 @@ class _PipVideoPlayerState extends State<PipVideoPlayer> with WidgetsBindingObse
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    // Handle app lifecycle changes
-    if (state == AppLifecycleState.paused) {
-      _controller.pause();
-    } else if (state == AppLifecycleState.resumed) {
-      if (_isPlaying.value) {
-        _controller.play();
+    if (!mounted || !_isPlayerReady) return;
+
+    try {
+      // Handle app lifecycle changes
+      if (state == AppLifecycleState.paused) {
+        // App is in background, pause the video
+        _controller.pause();
+      } else if (state == AppLifecycleState.resumed) {
+        // App is in foreground, resume if it was playing
+        if (_isPlaying.value) {
+          _controller.play();
+        }
+      } else if (state == AppLifecycleState.detached) {
+        // App is being terminated, ensure resources are released
+        _controller.pause();
       }
+    } catch (e) {
+      debugPrint('Error handling app lifecycle state change: $e');
     }
   }
 
@@ -76,7 +87,9 @@ class _PipVideoPlayerState extends State<PipVideoPlayer> with WidgetsBindingObse
   }
 
   void _listener() {
-    if (mounted) {
+    if (!mounted) return;
+
+    try {
       // Update player state
       _isPlaying.value = _controller.value.isPlaying;
       _isBuffering.value = _controller.value.playerState == PlayerState.buffering;
@@ -84,28 +97,51 @@ class _PipVideoPlayerState extends State<PipVideoPlayer> with WidgetsBindingObse
       // Mark player as ready when it's initialized
       if (!_isPlayerReady && _controller.value.isReady) {
         _isPlayerReady = true;
-        setState(() {});
+
+        // Only call setState if the widget is still mounted
+        if (mounted) {
+          setState(() {});
+        }
       }
+
+      // Handle video errors
+      if (_controller.value.hasError) {
+        debugPrint('YouTube player error: ${_controller.value.errorCode}');
+      }
+    } catch (e) {
+      debugPrint('Error in YouTube player listener: $e');
     }
   }
 
   @override
   void dispose() {
+    // Pause the player before disposing to prevent audio issues
+    if (_isPlayerReady) {
+      _controller.pause();
+    }
+
+    // Remove listener first to prevent callbacks after disposal
     try {
-      // Dispose player resources
       _controller.removeListener(_listener);
+    } catch (e) {
+      debugPrint('Error removing listener: $e');
+    }
+
+    // Dispose player resources
+    try {
       _controller.dispose();
     } catch (e) {
       debugPrint('Error disposing YouTube player controller: $e');
-    } finally {
-      // Always remove the observer to prevent memory leaks
-      try {
-        WidgetsBinding.instance.removeObserver(this);
-      } catch (e) {
-        debugPrint('Error removing observer: $e');
-      }
-      super.dispose();
     }
+
+    // Always remove the observer to prevent memory leaks
+    try {
+      WidgetsBinding.instance.removeObserver(this);
+    } catch (e) {
+      debugPrint('Error removing observer: $e');
+    }
+
+    super.dispose();
   }
 
   @override

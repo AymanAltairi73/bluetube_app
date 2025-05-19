@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:get/get.dart';
+import '../../../../core/usecases/usecase.dart';
 import '../../domain/entities/downloaded_video.dart';
 import '../../domain/entities/youtube_video.dart';
 import '../../domain/usecases/get_downloaded_videos.dart';
@@ -43,7 +44,7 @@ class DownloadsController extends GetxController {
     isLoading.value = true;
     errorMessage.value = '';
 
-    final result = await getDownloadedVideos();
+    final result = await getDownloadedVideos(const NoParams());
 
     isLoading.value = false;
 
@@ -83,7 +84,7 @@ class DownloadsController extends GetxController {
     // Simulate download progress
     _simulateDownloadProgress();
 
-    final result = await downloadVideo(video, quality: quality);
+    final result = await downloadVideo(DownloadVideoParams(video: video, quality: quality));
 
     return result.fold(
       (failure) {
@@ -123,7 +124,7 @@ class DownloadsController extends GetxController {
 
   /// Delete a downloaded video
   Future<bool> deleteVideo(String videoId) async {
-    final result = await deleteDownloadedVideo(videoId);
+    final result = await deleteDownloadedVideo(DeleteDownloadedVideoParams(videoId: videoId));
 
     return result.fold(
       (failure) {
@@ -163,7 +164,7 @@ class DownloadsController extends GetxController {
       return downloadedStatus[videoId]!;
     }
 
-    final result = await isVideoDownloaded(videoId);
+    final result = await isVideoDownloaded(IsVideoDownloadedParams(videoId: videoId));
 
     return result.fold(
       (failure) {
