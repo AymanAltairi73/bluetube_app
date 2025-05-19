@@ -25,4 +25,7 @@ abstract class YouTubeApiDataSource {
 
   /// Get video comments
   Future<Map<String, dynamic>> getVideoComments(String videoId);
+
+  /// Get related videos for a video
+  Future<YouTubeSearchResponseModel> getRelatedVideos(String videoId);
 }

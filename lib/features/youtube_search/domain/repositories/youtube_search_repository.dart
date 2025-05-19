@@ -41,6 +41,13 @@ abstract class YouTubeSearchRepository {
     String? pageToken,
   });
 
+  /// Get related videos for a video
+  Future<Either<Failure, List<YouTubeVideo>>> getRelatedVideos(
+    String videoId, {
+    int maxResults,
+    String? pageToken,
+  });
+
   /// Get next page token from the last search
   String? getNextPageToken();
 

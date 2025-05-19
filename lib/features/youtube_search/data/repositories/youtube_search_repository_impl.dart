@@ -162,4 +162,31 @@ class YouTubeSearchRepositoryImpl implements YouTubeSearchRepository {
       return Left(UnexpectedFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<YouTubeVideo>>> getRelatedVideos(
+    String videoId, {
+    int maxResults = ApiConfig.defaultMaxResults,
+    String? pageToken,
+  }) async {
+    try {
+      // In a real implementation, this would call the API data source
+      // For now, we'll implement a simple version that works with our mock data
+      final response = await dataSource.getRelatedVideos(videoId);
+
+      // Store pagination info
+      _nextPageToken = response.nextPageToken;
+      _prevPageToken = response.prevPageToken;
+      _totalResults = response.totalResults;
+
+      // Convert models to entities
+      final videos = response.videos.map((model) => model.toEntity()).toList();
+
+      return Right(videos);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message));
+    } catch (e) {
+      return Left(UnexpectedFailure(message: e.toString()));
+    }
+  }
 }
