@@ -21,9 +21,9 @@ class _SignupScreenState extends State<SignupScreen> with SingleTickerProviderSt
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
-  
+
   final AuthController _authController = Get.find<AuthController>();
-  
+
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,7 @@ class _SignupScreenState extends State<SignupScreen> with SingleTickerProviderSt
       vsync: this,
       duration: const Duration(milliseconds: 800),
     );
-    
+
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -41,7 +41,7 @@ class _SignupScreenState extends State<SignupScreen> with SingleTickerProviderSt
         curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
       ),
     );
-    
+
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.1),
       end: Offset.zero,
@@ -51,13 +51,13 @@ class _SignupScreenState extends State<SignupScreen> with SingleTickerProviderSt
         curve: const Interval(0.2, 0.8, curve: Curves.easeOut),
       ),
     );
-    
+
     // Clear any previous form data
     _authController.clearForms();
-    
+
     _animationController.forward();
   }
-  
+
   @override
   void dispose() {
     _animationController.dispose();
@@ -67,7 +67,7 @@ class _SignupScreenState extends State<SignupScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -117,9 +117,9 @@ class _SignupScreenState extends State<SignupScreen> with SingleTickerProviderSt
                           ),
                         ],
                       ),
-                      
+
                       SizedBox(height: 40.h),
-                      
+
                       // Name field
                       AuthTextField(
                         hintText: 'Full Name',
@@ -130,9 +130,9 @@ class _SignupScreenState extends State<SignupScreen> with SingleTickerProviderSt
                         onEditingComplete: () => FocusScope.of(context).requestFocus(_authController.emailFocusNode),
                         validator: ValidationUtils.validateName,
                       ),
-                      
+
                       SizedBox(height: 16.h),
-                      
+
                       // Email field
                       AuthTextField(
                         hintText: 'Enter Your Email',
@@ -144,9 +144,9 @@ class _SignupScreenState extends State<SignupScreen> with SingleTickerProviderSt
                         onEditingComplete: () => FocusScope.of(context).requestFocus(_authController.passwordFocusNode),
                         validator: ValidationUtils.validateEmail,
                       ),
-                      
+
                       SizedBox(height: 16.h),
-                      
+
                       // Password field
                       AuthTextField(
                         hintText: 'Password',
@@ -158,9 +158,9 @@ class _SignupScreenState extends State<SignupScreen> with SingleTickerProviderSt
                         onEditingComplete: () => FocusScope.of(context).requestFocus(_authController.confirmPasswordFocusNode),
                         validator: ValidationUtils.validatePassword,
                       ),
-                      
+
                       SizedBox(height: 16.h),
-                      
+
                       // Confirm password field
                       AuthTextField(
                         hintText: 'Reset Password',
@@ -175,9 +175,9 @@ class _SignupScreenState extends State<SignupScreen> with SingleTickerProviderSt
                           _authController.passwordController.text,
                         ),
                       ),
-                      
+
                       SizedBox(height: 16.h),
-                      
+
                       // Terms and conditions
                       Row(
                         children: [
@@ -219,9 +219,9 @@ class _SignupScreenState extends State<SignupScreen> with SingleTickerProviderSt
                           ),
                         ],
                       ),
-                      
+
                       SizedBox(height: 16.h),
-                      
+
                       // Error message
                       Obx(() {
                         if (_authController.signupErrorMessage.isNotEmpty) {
@@ -243,18 +243,18 @@ class _SignupScreenState extends State<SignupScreen> with SingleTickerProviderSt
                         }
                         return const SizedBox.shrink();
                       }),
-                      
+
                       SizedBox(height: 24.h),
-                      
+
                       // Register button
                       Obx(() => AuthButton(
                         text: 'Register',
                         isLoading: _authController.isSignupLoading.value,
                         onPressed: () => _authController.signup(),
                       )),
-                      
+
                       SizedBox(height: 24.h),
-                      
+
                       // Social login options
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -266,15 +266,15 @@ class _SignupScreenState extends State<SignupScreen> with SingleTickerProviderSt
                           )),
                           SizedBox(width: 16.w),
                           Obx(() => SocialLoginButton(
-                            type: SocialLoginType.apple,
-                            isLoading: _authController.isAppleLoading.value,
-                            onPressed: () => _authController.loginWithApple(),
+                            type: SocialLoginType.facebook,
+                            isLoading: _authController.isFacebookLoading.value,
+                            onPressed: () => _authController.loginWithFacebook(),
                           )),
                         ],
                       ),
-                      
+
                       SizedBox(height: 24.h),
-                      
+
                       // Login option
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

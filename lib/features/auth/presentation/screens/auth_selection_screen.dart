@@ -19,9 +19,9 @@ class _AuthSelectionScreenState extends State<AuthSelectionScreen> with SingleTi
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
-  
+
   final AuthController _authController = Get.find<AuthController>();
-  
+
   @override
   void initState() {
     super.initState();
@@ -29,7 +29,7 @@ class _AuthSelectionScreenState extends State<AuthSelectionScreen> with SingleTi
       vsync: this,
       duration: const Duration(milliseconds: 800),
     );
-    
+
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -39,7 +39,7 @@ class _AuthSelectionScreenState extends State<AuthSelectionScreen> with SingleTi
         curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
       ),
     );
-    
+
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.1),
       end: Offset.zero,
@@ -49,10 +49,10 @@ class _AuthSelectionScreenState extends State<AuthSelectionScreen> with SingleTi
         curve: const Interval(0.2, 0.8, curve: Curves.easeOut),
       ),
     );
-    
+
     _animationController.forward();
   }
-  
+
   @override
   void dispose() {
     _animationController.dispose();
@@ -62,7 +62,7 @@ class _AuthSelectionScreenState extends State<AuthSelectionScreen> with SingleTi
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -77,7 +77,7 @@ class _AuthSelectionScreenState extends State<AuthSelectionScreen> with SingleTi
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: 40.h),
-                    
+
                     // App logo
                     CircleAvatar(
                       radius: 50.r,
@@ -88,9 +88,9 @@ class _AuthSelectionScreenState extends State<AuthSelectionScreen> with SingleTi
                         height: 80.h,
                       ),
                     ),
-                    
+
                     SizedBox(height: 24.h),
-                    
+
                     // App name
                     Text(
                       'BlueTube',
@@ -100,9 +100,9 @@ class _AuthSelectionScreenState extends State<AuthSelectionScreen> with SingleTi
                         color: isDarkMode ? AppColors.textLight : AppColors.textPrimary,
                       ),
                     ),
-                    
+
                     SizedBox(height: 16.h),
-                    
+
                     // Welcome text
                     Text(
                       'Well come\nto best video app In World',
@@ -113,9 +113,9 @@ class _AuthSelectionScreenState extends State<AuthSelectionScreen> with SingleTi
                         color: isDarkMode ? AppColors.textLight : AppColors.textPrimary,
                       ),
                     ),
-                    
+
                     SizedBox(height: 16.h),
-                    
+
                     // App description
                     Text(
                       'Rowse welcome text animations videos and find your perfect clip. Free HD & 4K videos. Royalty-free videos.Welcome, Channel, Message, InformationMissing: best | Show results with:',
@@ -125,17 +125,17 @@ class _AuthSelectionScreenState extends State<AuthSelectionScreen> with SingleTi
                         color: isDarkMode ? Colors.grey[300] : AppColors.textSecondary,
                       ),
                     ),
-                    
+
                     SizedBox(height: 40.h),
-                    
+
                     // Login button
                     AuthButton(
                       text: 'Log in',
                       onPressed: () => Get.toNamed('/login'),
                     ),
-                    
+
                     SizedBox(height: 16.h),
-                    
+
                     // Social login options
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -146,14 +146,14 @@ class _AuthSelectionScreenState extends State<AuthSelectionScreen> with SingleTi
                         ),
                         SizedBox(width: 16.w),
                         SocialLoginButton(
-                          type: SocialLoginType.apple,
-                          onPressed: () => _authController.loginWithApple(),
+                          type: SocialLoginType.facebook,
+                          onPressed: () => _authController.loginWithFacebook(),
                         ),
                       ],
                     ),
-                    
+
                     SizedBox(height: 24.h),
-                    
+
                     // Sign up option
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -178,9 +178,9 @@ class _AuthSelectionScreenState extends State<AuthSelectionScreen> with SingleTi
                         ),
                       ],
                     ),
-                    
+
                     SizedBox(height: 16.h),
-                    
+
                     // Continue as guest
                     TextButton(
                       onPressed: () => _authController.continueAsGuest(),

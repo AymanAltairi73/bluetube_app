@@ -6,7 +6,6 @@ import '../../../../core/constants/app_dimensions.dart';
 /// Social login button types
 enum SocialLoginType {
   google,
-  apple,
   facebook,
   twitter,
 }
@@ -126,14 +125,6 @@ class _SocialLoginButtonState extends State<SocialLoginButton> with SingleTicker
           'assets/images/google_logo.png',
           width: 24.w,
           height: 24.w,
-        );
-      case SocialLoginType.apple:
-        return Icon(
-          Icons.apple,
-          size: 28.sp,
-          color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.white
-              : Colors.black,
         );
       case SocialLoginType.facebook:
         return Icon(

@@ -19,14 +19,22 @@ class MainNavigationController extends GetxController {
   // Navigation history for back button handling
   final RxList<int> navigationHistory = <int>[0].obs;
 
-  // Screens list
-  final List<Widget> screens = [
-    const HomeScreen(),
-    const ExploreScreen(),
-    const SubscriptionScreen(),
-    const LibraryScreen(),
-    const DownloadsScreen(),
-  ];
+  // Screens list - lazy loaded to ensure controllers are initialized
+  late final List<Widget> screens;
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    // Initialize screens after controllers are ready
+    screens = [
+      const HomeScreen(),
+      const ExploreScreen(),
+      const SubscriptionScreen(),
+      const LibraryScreen(),
+      const DownloadsScreen(),
+    ];
+  }
 
   // Screen routes for deep linking
   final List<String> screenRoutes = [
@@ -100,8 +108,8 @@ class MainNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize the controller
-    final controller = Get.put(MainNavigationController());
+    // Get the controller from the binding
+    final controller = Get.find<MainNavigationController>();
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Obx(() {
@@ -116,7 +124,7 @@ class MainNavigation extends StatelessWidget {
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
+                      color: Colors.black.withAlpha(26),
                       blurRadius: 8,
                       offset: const Offset(0, -2),
                     ),
@@ -127,7 +135,7 @@ class MainNavigation extends StatelessWidget {
                   backgroundColor: isDarkMode ? AppColors.backgroundDark : AppColors.background,
                   selectedItemColor: isDarkMode ? AppColors.primaryLight : AppColors.primary,
                   unselectedItemColor: isDarkMode
-                      ? AppColors.textLight.withValues(alpha: 0.7)
+                      ? AppColors.textLight.withAlpha(179)
                       : AppColors.textSecondary,
                   selectedLabelStyle: TextStyle(
                     fontSize: 12.sp,

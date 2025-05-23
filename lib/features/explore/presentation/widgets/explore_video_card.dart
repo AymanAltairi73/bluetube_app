@@ -52,7 +52,7 @@ class ExploreVideoCard extends StatelessWidget {
                       vertical: 4.h,
                     ),
                     decoration: BoxDecoration(
-                      color: video.isLive ? Colors.red : Colors.black.withValues(alpha: 0.7),
+                      color: video.isLive ? Colors.red : Colors.black.withAlpha(179),
                       borderRadius: BorderRadius.circular(4.r),
                     ),
                     child: Text(
@@ -150,7 +150,7 @@ class ExploreVideoCard extends StatelessWidget {
                       vertical: 2.h,
                     ),
                     decoration: BoxDecoration(
-                      color: video.isLive ? Colors.red : Colors.black.withValues(alpha: 0.7),
+                      color: video.isLive ? Colors.red : Colors.black.withAlpha(179),
                       borderRadius: BorderRadius.circular(4.r),
                     ),
                     child: Text(

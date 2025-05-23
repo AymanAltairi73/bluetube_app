@@ -27,7 +27,7 @@ class AuthController extends GetxController {
   final RxBool isLoginLoading = false.obs;
   final RxBool isSignupLoading = false.obs;
   final RxBool isGoogleLoading = false.obs;
-  final RxBool isAppleLoading = false.obs;
+  final RxBool isFacebookLoading = false.obs;
   final RxBool isForgotPasswordLoading = false.obs;
 
   // Error messages
@@ -37,6 +37,9 @@ class AuthController extends GetxController {
 
   // Terms and conditions checkbox
   final RxBool acceptedTerms = false.obs;
+
+  // Authentication status
+  final RxBool isLoggedIn = false.obs;
 
   @override
   void onClose() {
@@ -58,7 +61,14 @@ class AuthController extends GetxController {
   /// Validate login form
   bool validateLoginForm() {
     loginErrorMessage.value = '';
-    return loginFormKey.currentState?.validate() ?? false;
+
+    // Check if form key is valid
+    if (loginFormKey.currentState == null) {
+      loginErrorMessage.value = 'Form is not initialized';
+      return false;
+    }
+
+    return loginFormKey.currentState!.validate();
   }
 
   /// Validate signup form
@@ -71,11 +81,23 @@ class AuthController extends GetxController {
       return false;
     }
 
-    return signupFormKey.currentState?.validate() ?? false;
+    // Check if form key is valid
+    if (signupFormKey.currentState == null) {
+      signupErrorMessage.value = 'Form is not initialized';
+      return false;
+    }
+
+    return signupFormKey.currentState!.validate();
   }
 
   /// Login with email and password
   Future<void> login() async {
+    // Check if controllers are disposed
+    if (_isControllerDisposed(emailController) || _isControllerDisposed(passwordController)) {
+      loginErrorMessage.value = 'Unable to access form fields';
+      return;
+    }
+
     if (!validateLoginForm()) return;
 
     isLoginLoading.value = true;
@@ -95,6 +117,15 @@ class AuthController extends GetxController {
 
   /// Sign up with email and password
   Future<void> signup() async {
+    // Check if controllers are disposed
+    if (_isControllerDisposed(emailController) ||
+        _isControllerDisposed(passwordController) ||
+        _isControllerDisposed(confirmPasswordController) ||
+        _isControllerDisposed(nameController)) {
+      signupErrorMessage.value = 'Unable to access form fields';
+      return;
+    }
+
     if (!validateSignupForm()) return;
 
     isSignupLoading.value = true;
@@ -129,9 +160,9 @@ class AuthController extends GetxController {
     }
   }
 
-  /// Login with Apple
-  Future<void> loginWithApple() async {
-    isAppleLoading.value = true;
+  /// Login with Facebook
+  Future<void> loginWithFacebook() async {
+    isFacebookLoading.value = true;
 
     try {
       // Simulate network delay
@@ -140,14 +171,20 @@ class AuthController extends GetxController {
       // Mock successful login
       _navigationService.navigateToMain();
     } catch (e) {
-      loginErrorMessage.value = 'Apple login failed: ${e.toString()}';
+      loginErrorMessage.value = 'Facebook login failed: ${e.toString()}';
     } finally {
-      isAppleLoading.value = false;
+      isFacebookLoading.value = false;
     }
   }
 
   /// Send password reset email
   Future<void> sendPasswordResetEmail() async {
+    // Check if controller is disposed
+    if (_isControllerDisposed(emailController)) {
+      forgotPasswordMessage.value = 'Unable to access email field';
+      return;
+    }
+
     if (emailController.text.isEmpty) {
       forgotPasswordMessage.value = 'Please enter your email address';
       return;
@@ -160,12 +197,15 @@ class AuthController extends GetxController {
 
     isForgotPasswordLoading.value = true;
 
+    // Store email in a local variable to avoid accessing the controller later
+    final email = emailController.text;
+
     try {
       // Simulate network delay
       await Future.delayed(const Duration(seconds: 2));
 
       // Mock successful password reset
-      forgotPasswordMessage.value = 'Password reset email sent to ${emailController.text}';
+      forgotPasswordMessage.value = 'Password reset email sent to $email';
       Get.snackbar(
         'Success',
         'Password reset email sent',
@@ -190,13 +230,45 @@ class AuthController extends GetxController {
 
   /// Clear all form fields
   void clearForms() {
-    emailController.clear();
-    passwordController.clear();
-    confirmPasswordController.clear();
-    nameController.clear();
-    acceptedTerms.value = false;
-    loginErrorMessage.value = '';
-    signupErrorMessage.value = '';
-    forgotPasswordMessage.value = '';
+    try {
+      // Use a safer approach to check if controllers are disposed
+      if (!_isControllerDisposed(emailController)) emailController.clear();
+      if (!_isControllerDisposed(passwordController)) passwordController.clear();
+      if (!_isControllerDisposed(confirmPasswordController)) confirmPasswordController.clear();
+      if (!_isControllerDisposed(nameController)) nameController.clear();
+
+      acceptedTerms.value = false;
+      loginErrorMessage.value = '';
+      signupErrorMessage.value = '';
+      forgotPasswordMessage.value = '';
+    } catch (e) {
+      // Handle the case where controllers might have been disposed
+      debugPrint('Error clearing forms: ${e.toString()}');
+    }
+  }
+
+  // Helper method to check if a controller is disposed
+  bool _isControllerDisposed(TextEditingController controller) {
+    try {
+      // Accessing controller.text will throw if controller is disposed
+      controller.text;
+      return false; // If no exception, controller is not disposed
+    } catch (e) {
+      return true; // If exception, controller is disposed
+    }
+  }
+
+  /// Check authentication status (mock implementation)
+  Future<void> checkAuthStatus() async {
+    try {
+      // Simulate checking authentication status
+      await Future.delayed(const Duration(seconds: 1));
+
+      // For demo purposes, we'll set isLoggedIn to false
+      // This is a mock implementation since Firebase Authentication is not required
+      isLoggedIn.value = false;
+    } catch (e) {
+      isLoggedIn.value = false;
+    }
   }
 }

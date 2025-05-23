@@ -28,57 +28,66 @@ class ExploreScreen extends StatelessWidget {
       ),
       body: RefreshIndicator(
         onRefresh: controller.refreshExploreData,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Categories grid
-              Obx(() => _buildCategoriesSection(controller)),
-
-              // Trending videos section
-              Padding(
-                padding: EdgeInsets.all(16.r),
-                child: Text(
-                  'Trending',
-                  style: TextStyle(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight,
                 ),
-              ),
-              Obx(() => _buildTrendingVideosSection(controller)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Categories grid
+                    Obx(() => _buildCategoriesSection(controller)),
 
-              // Selected category videos section
-              Obx(() {
-                if (controller.selectedCategoryId.isNotEmpty) {
-                  final categoryName = controller.categories
-                      .firstWhere(
-                        (cat) => cat.id == controller.selectedCategoryId.value,
-                        orElse: () => controller.categories.first,
-                      )
-                      .title;
-
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(16.r),
-                        child: Text(
-                          categoryName,
-                          style: TextStyle(
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
+                    // Trending videos section
+                    Padding(
+                      padding: EdgeInsets.all(16.r),
+                      child: Text(
+                        'Trending',
+                        style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      _buildCategoryVideosSection(controller),
-                    ],
-                  );
-                }
-                return const SizedBox.shrink();
-              }),
-            ],
-          ),
+                    ),
+                    Obx(() => _buildTrendingVideosSection(controller)),
+
+                    // Selected category videos section
+                    Obx(() {
+                      if (controller.selectedCategoryId.isNotEmpty) {
+                        final categoryName = controller.categories
+                            .firstWhere(
+                              (cat) => cat.id == controller.selectedCategoryId.value,
+                              orElse: () => controller.categories.first,
+                            )
+                            .title;
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(16.r),
+                              child: Text(
+                                categoryName,
+                                style: TextStyle(
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            _buildCategoryVideosSection(controller),
+                          ],
+                        );
+                      }
+                      return const SizedBox.shrink();
+                    }),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -173,22 +182,25 @@ class ExploreScreen extends StatelessWidget {
       );
     }
 
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.symmetric(horizontal: 8.w),
-      shrinkWrap: true,
-      physics: const BouncingScrollPhysics(),
-      itemCount: controller.trendingVideos.length,
-      itemBuilder: (context, index) {
-        final video = controller.trendingVideos[index];
-        return ExploreVideoCard(
-          video: video,
-          onTap: () {
-            // Navigate to video player
-            navigationService.navigateToVideoPlayer(video.id);
-          },
-        );
-      },
+    return SizedBox(
+      height: 300.h,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: 8.w),
+        shrinkWrap: true,
+        physics: const BouncingScrollPhysics(),
+        itemCount: controller.trendingVideos.length,
+        itemBuilder: (context, index) {
+          final video = controller.trendingVideos[index];
+          return ExploreVideoCard(
+            video: video,
+            onTap: () {
+              // Navigate to video player
+              navigationService.navigateToVideoPlayer(video.id);
+            },
+          );
+        },
+      ),
     );
   }
 
@@ -215,22 +227,28 @@ class ExploreScreen extends StatelessWidget {
       );
     }
 
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      itemCount: controller.selectedCategoryVideos.length,
-      itemBuilder: (context, index) {
-        final video = controller.selectedCategoryVideos[index];
-        return ExploreVideoCard(
-          video: video,
-          isHorizontal: true,
-          onTap: () {
-            // Navigate to video player
-            navigationService.navigateToVideoPlayer(video.id);
-          },
-        );
-      },
+    return Container(
+      constraints: BoxConstraints(
+        minHeight: 100.h,
+        maxHeight: controller.selectedCategoryVideos.length * 140.h,
+      ),
+      child: ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        itemCount: controller.selectedCategoryVideos.length,
+        itemBuilder: (context, index) {
+          final video = controller.selectedCategoryVideos[index];
+          return ExploreVideoCard(
+            video: video,
+            isHorizontal: true,
+            onTap: () {
+              // Navigate to video player
+              navigationService.navigateToVideoPlayer(video.id);
+            },
+          );
+        },
+      ),
     );
   }
 }

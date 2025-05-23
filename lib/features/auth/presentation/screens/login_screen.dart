@@ -21,9 +21,9 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
-  
+
   final AuthController _authController = Get.find<AuthController>();
-  
+
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
       vsync: this,
       duration: const Duration(milliseconds: 800),
     );
-    
+
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
         curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
       ),
     );
-    
+
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.1),
       end: Offset.zero,
@@ -51,13 +51,13 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
         curve: const Interval(0.2, 0.8, curve: Curves.easeOut),
       ),
     );
-    
+
     // Clear any previous form data
     _authController.clearForms();
-    
+
     _animationController.forward();
   }
-  
+
   @override
   void dispose() {
     _animationController.dispose();
@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -117,9 +117,9 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                           ),
                         ],
                       ),
-                      
+
                       SizedBox(height: 40.h),
-                      
+
                       // Email field
                       AuthTextField(
                         hintText: 'Enter Your Email',
@@ -131,9 +131,9 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                         onEditingComplete: () => FocusScope.of(context).requestFocus(_authController.passwordFocusNode),
                         validator: ValidationUtils.validateEmail,
                       ),
-                      
+
                       SizedBox(height: 16.h),
-                      
+
                       // Password field
                       AuthTextField(
                         hintText: 'Password',
@@ -145,9 +145,9 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                         onEditingComplete: () => _authController.login(),
                         validator: ValidationUtils.validatePassword,
                       ),
-                      
+
                       SizedBox(height: 8.h),
-                      
+
                       // Forgot password
                       Align(
                         alignment: Alignment.centerRight,
@@ -162,9 +162,9 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                           ),
                         ),
                       ),
-                      
+
                       SizedBox(height: 16.h),
-                      
+
                       // Error message
                       Obx(() {
                         if (_authController.loginErrorMessage.isNotEmpty) {
@@ -186,18 +186,18 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                         }
                         return const SizedBox.shrink();
                       }),
-                      
+
                       SizedBox(height: 24.h),
-                      
+
                       // Login button
                       Obx(() => AuthButton(
                         text: 'Log in',
                         isLoading: _authController.isLoginLoading.value,
                         onPressed: () => _authController.login(),
                       )),
-                      
+
                       SizedBox(height: 24.h),
-                      
+
                       // Social login options
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -209,15 +209,15 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                           )),
                           SizedBox(width: 16.w),
                           Obx(() => SocialLoginButton(
-                            type: SocialLoginType.apple,
-                            isLoading: _authController.isAppleLoading.value,
-                            onPressed: () => _authController.loginWithApple(),
+                            type: SocialLoginType.facebook,
+                            isLoading: _authController.isFacebookLoading.value,
+                            onPressed: () => _authController.loginWithFacebook(),
                           )),
                         ],
                       ),
-                      
+
                       SizedBox(height: 24.h),
-                      
+
                       // Sign up option
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -255,7 +255,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
       ),
     );
   }
-  
+
   /// Show forgot password dialog
   void _showForgotPasswordDialog() {
     Get.dialog(

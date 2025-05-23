@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "987053809115",
+    "project_id": "alsaddah-food-delivery-app",
+    "storage_bucket": "alsaddah-food-delivery-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987053809115:android:012f6c0284939b54579bfe",
+        "android_client_info": {
+          "package_name": "com.example.alsaddah_food_delivery_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987053809115-th8v9pvrv234b6cob0optrpm978uh20k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3-ZQP_lrKK3c4JbWBlpUAGOGSkW8cs1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987053809115-th8v9pvrv234b6cob0optrpm978uh20k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "987053809115-iuirp66ofq51asidhqnt6eri9emee3e7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.alsaddahFoodDeliveryApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987053809115:android:1a0a3b3b99c42c02579bfe",
+        "android_client_info": {
+          "package_name": "com.example.bluetube_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987053809115-th8v9pvrv234b6cob0optrpm978uh20k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3-ZQP_lrKK3c4JbWBlpUAGOGSkW8cs1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987053809115-th8v9pvrv234b6cob0optrpm978uh20k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "987053809115-iuirp66ofq51asidhqnt6eri9emee3e7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.alsaddahFoodDeliveryApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

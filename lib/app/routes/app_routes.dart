@@ -20,4 +20,5 @@ class AppRoutes {
   static const auth = '/auth';
   static const login = '/login';
   static const signup = '/signup';
+  static const splash = '/splash';
 }
