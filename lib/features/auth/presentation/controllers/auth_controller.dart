@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../app/navigation/navigation_service.dart';
 import '../../../../core/utils/validation_utils.dart';
+import '../../domain/repositories/auth_repository.dart';
 
 /// Controller for authentication screens
 class AuthController extends GetxController {
-  // Navigation service
+  // Dependencies
   final NavigationService _navigationService = Get.find<NavigationService>();
+  final AuthRepository _authRepository;
+
+  AuthController({required AuthRepository authRepository}) : _authRepository = authRepository;
   // Form keys
   final loginFormKey = GlobalKey<FormState>();
   final signupFormKey = GlobalKey<FormState>();
@@ -103,11 +107,22 @@ class AuthController extends GetxController {
     isLoginLoading.value = true;
 
     try {
-      // Simulate network delay
-      await Future.delayed(const Duration(seconds: 2));
+      // Use repository to login
+      final result = await _authRepository.login(
+        email: emailController.text.trim(),
+        password: passwordController.text,
+      );
 
-      // Mock successful login
-      _navigationService.navigateToMain();
+      result.fold(
+        (failure) {
+          // Handle login failure
+          loginErrorMessage.value = failure.message;
+        },
+        (authResponse) {
+          // Handle successful login
+          _navigationService.navigateToMain();
+        },
+      );
     } catch (e) {
       loginErrorMessage.value = 'Login failed: ${e.toString()}';
     } finally {
@@ -131,11 +146,23 @@ class AuthController extends GetxController {
     isSignupLoading.value = true;
 
     try {
-      // Simulate network delay
-      await Future.delayed(const Duration(seconds: 2));
+      // Use repository to signup
+      final result = await _authRepository.signup(
+        name: nameController.text.trim(),
+        email: emailController.text.trim(),
+        password: passwordController.text,
+      );
 
-      // Mock successful signup
-      _navigationService.navigateToMain();
+      result.fold(
+        (failure) {
+          // Handle signup failure
+          signupErrorMessage.value = failure.message;
+        },
+        (authResponse) {
+          // Handle successful signup
+          _navigationService.navigateToMain();
+        },
+      );
     } catch (e) {
       signupErrorMessage.value = 'Signup failed: ${e.toString()}';
     } finally {
@@ -148,11 +175,19 @@ class AuthController extends GetxController {
     isGoogleLoading.value = true;
 
     try {
-      // Simulate network delay
-      await Future.delayed(const Duration(seconds: 2));
+      // Use repository to login with Google
+      final result = await _authRepository.loginWithGoogle();
 
-      // Mock successful login
-      _navigationService.navigateToMain();
+      result.fold(
+        (failure) {
+          // Handle login failure
+          loginErrorMessage.value = failure.message;
+        },
+        (authResponse) {
+          // Handle successful login
+          _navigationService.navigateToMain();
+        },
+      );
     } catch (e) {
       loginErrorMessage.value = 'Google login failed: ${e.toString()}';
     } finally {
@@ -165,13 +200,8 @@ class AuthController extends GetxController {
     isFacebookLoading.value = true;
 
     try {
-      // Simulate network delay
-      await Future.delayed(const Duration(seconds: 2));
-
-      // Mock successful login
-      _navigationService.navigateToMain();
-    } catch (e) {
-      loginErrorMessage.value = 'Facebook login failed: ${e.toString()}';
+      // Facebook login is not implemented as per requirements
+      loginErrorMessage.value = 'Facebook login is not implemented';
     } finally {
       isFacebookLoading.value = false;
     }
@@ -198,18 +228,26 @@ class AuthController extends GetxController {
     isForgotPasswordLoading.value = true;
 
     // Store email in a local variable to avoid accessing the controller later
-    final email = emailController.text;
+    final email = emailController.text.trim();
 
     try {
-      // Simulate network delay
-      await Future.delayed(const Duration(seconds: 2));
+      // Use repository to send password reset email
+      final result = await _authRepository.forgotPassword(email);
 
-      // Mock successful password reset
-      forgotPasswordMessage.value = 'Password reset email sent to $email';
-      Get.snackbar(
-        'Success',
-        'Password reset email sent',
-        snackPosition: SnackPosition.BOTTOM,
+      result.fold(
+        (failure) {
+          // Handle failure
+          forgotPasswordMessage.value = failure.message;
+        },
+        (success) {
+          // Handle success
+          forgotPasswordMessage.value = 'Password reset email sent to $email';
+          Get.snackbar(
+            'Success',
+            'Password reset email sent',
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        },
       );
     } catch (e) {
       forgotPasswordMessage.value = 'Failed to send reset email: ${e.toString()}';
@@ -258,15 +296,22 @@ class AuthController extends GetxController {
     }
   }
 
-  /// Check authentication status (mock implementation)
+  /// Check authentication status
   Future<void> checkAuthStatus() async {
     try {
-      // Simulate checking authentication status
-      await Future.delayed(const Duration(seconds: 1));
+      // Use repository to check if user is logged in
+      final result = await _authRepository.isLoggedIn();
 
-      // For demo purposes, we'll set isLoggedIn to false
-      // This is a mock implementation since Firebase Authentication is not required
-      isLoggedIn.value = false;
+      result.fold(
+        (failure) {
+          // Handle failure
+          isLoggedIn.value = false;
+        },
+        (loggedIn) {
+          // Set login status
+          isLoggedIn.value = loggedIn;
+        },
+      );
     } catch (e) {
       isLoggedIn.value = false;
     }

@@ -307,7 +307,7 @@ Future<void> init() async {
   //! Features - Authentication
   // Controllers
   sl.registerFactory(
-    () => AuthController(),
+    () => AuthController(authRepository: sl()),
   );
 
   //! Features - Watch Later

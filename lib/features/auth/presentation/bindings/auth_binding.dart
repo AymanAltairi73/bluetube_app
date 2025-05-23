@@ -1,8 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import '../../data/datasources/auth_local_data_source.dart';
-import '../../data/datasources/auth_remote_data_source.dart';
+import '../../data/datasources/auth_service.dart';
 import '../../data/repositories/auth_repository_impl.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/usecases/login_use_case.dart';
@@ -16,24 +15,20 @@ import '../controllers/signup_controller.dart';
 class AuthBinding extends Bindings {
   @override
   void dependencies() {
-    // Register HTTP client if not already registered
-    if (!Get.isRegistered<http.Client>()) {
-      Get.put(http.Client());
-    }
-
     // Register data sources
     Get.lazyPut<AuthLocalDataSource>(
       () => AuthLocalDataSourceImpl(secureStorage: const FlutterSecureStorage()),
     );
 
-    Get.lazyPut<AuthRemoteDataSource>(
-      () => AuthRemoteDataSourceImpl(client: Get.find<http.Client>()),
+    // Register AuthService
+    Get.lazyPut<AuthService>(
+      () => AuthService(),
     );
 
     // Register repository
     Get.lazyPut<AuthRepository>(
       () => AuthRepositoryImpl(
-        remoteDataSource: Get.find<AuthRemoteDataSource>(),
+        authService: Get.find<AuthService>(),
         localDataSource: Get.find<AuthLocalDataSource>(),
       ),
     );
@@ -52,7 +47,10 @@ class AuthBinding extends Bindings {
     );
 
     // Register controllers
-    Get.put<AuthController>(AuthController(), permanent: true);
+    Get.put<AuthController>(
+      AuthController(authRepository: Get.find<AuthRepository>()),
+      permanent: true,
+    );
 
     Get.lazyPut(
       () => LoginController(loginUseCase: Get.find<LoginUseCase>()),
